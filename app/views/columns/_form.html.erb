@@ -1,0 +1,32 @@
+<%= form_with(model: column, local: true) do |form| %>
+  <% if column.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(column.errors.count, "error") %> prohibited this column from being saved:</h2>
+
+      <ul>
+      <% column.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :column_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :position %>
+    <%= form.number_field :position, id: :column_position %>
+  </div>
+
+  <div class="field">
+    <%= form.label :board_id %>
+    <%= select("column", "board_id", Board.all.collect { |a| [a.name, a.id] }, { include_blank: true }) %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

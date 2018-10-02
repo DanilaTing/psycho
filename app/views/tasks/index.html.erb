@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tasks</h1>
+<% @tasks.each do |task| %>
+  <%= task.name %>
+  <% @projects.each do |project| %>
+    <% if project.id = task.project_id %>
+      <p>project: <strong><%= project.name %></strong></p>
+    <% end %>
+  <% end %>
+  <%= link_to 'Show', task %>
+  <%= link_to 'Edit', edit_task_path(task) %>
+  <%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %> <br><br><br>
+<% end %>
