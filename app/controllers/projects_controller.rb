@@ -26,6 +26,7 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(project_params)
+    @board_in_project = BoardInProject.new(board_in_project_params)
 
     respond_to do |format|
       if @project.save
@@ -70,6 +71,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :description, :type)
+      params.require(:project).permit(:name, :description, :type, board_in_projects_attributes: [:project_id, :board_id])
     end
 end

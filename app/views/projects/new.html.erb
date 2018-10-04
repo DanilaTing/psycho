@@ -2,4 +2,8 @@
 
 <%= render 'form', project: @project %>
 
+<div id="newBoardInProject">
+  <%= link_to 'Add board', action: :new_board_in_project, controller: :board_in_projects, remote: true %>
+</div>
+
 <%= link_to 'Back', projects_path %>
