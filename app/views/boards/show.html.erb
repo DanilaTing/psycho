@@ -1,10 +1,23 @@
 <p id="notice"><%= notice %></p>
-
-<h2><%= @board.name %></h2>
-<section>
-  <% @columns.each do |column| %>
-    <%= column.name %>
-  <% end %>
+<section class="board">
+  <h2 class="boardName"><%= @board.name %></h2>
+  <section class="columns">
+    <% @columns.each do |column| %>
+      <% if column.name == 'Done'%>
+        <div class="column" id="done">
+          <h2 class="columnHeading"><%= column.name %></h2>
+        </div>
+      <% elsif column.name == 'Inbox' %>
+        <div class="column" id="inbox">
+          <h2 class="columnHeading"><%= column.name %></h2>
+        </div>
+      <% else %>
+        <div class="column">
+          <h2 class="columnHeading"><%= column.name %></h2>
+        </div>
+      <% end %>
+    <% end %>
+  </section>
 </section>
 
 <%= link_to 'Edit', edit_board_path(@board) %> |

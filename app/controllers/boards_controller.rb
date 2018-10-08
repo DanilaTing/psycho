@@ -11,6 +11,8 @@ class BoardsController < ApplicationController
   # GET /boards/1.json
   def show
     @columns = Column.where(:board_id => @board.id).order(position: :asc)
+    @done = Column.where(:name => 'Done')
+    @inbox = Column.where(:name => 'Inbox')
   end
 
   # GET /boards/new

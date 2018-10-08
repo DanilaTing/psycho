@@ -24,6 +24,7 @@ class BoardInProjectsController < ApplicationController
 
   def new_board_in_project
     @board_in_project = BoardInProject.new
+
     respond_to do |format|
       format.js { render :newBoardInProject }
     end
@@ -36,8 +37,9 @@ class BoardInProjectsController < ApplicationController
 
     respond_to do |format|
       if @board_in_project.save
-        format.html { redirect_to @board_in_project, notice: 'Board was successfully created.' }
+        format.html { redirect_to @board_in_project, notice: 'Video was successfully created.' }
         format.json { render :show, status: :created, location: @board_in_project }
+        format.js { render :newBoardInProject }
       else
         format.html { render :new }
         format.json { render json: @board_in_project.errors, status: :unprocessable_entity }
@@ -50,11 +52,9 @@ class BoardInProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @board_in_project.update(board_in_project_params)
-        format.html { redirect_to @board_in_project, notice: 'Board was successfully updated.' }
-        format.json { render :show, status: :ok, location: @board_in_project }
+
       else
-        format.html { render :edit }
-        format.json { render json: @board_in_project.errors, status: :unprocessable_entity }
+
       end
     end
   end
