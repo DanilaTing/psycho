@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 <section class="board">
-  <h2 class="boardName"><%= @board.name %></h2>
+  <h2 class="boardName"><%= board.name %></h2>
   <section class="columns">
-    <% @columns.each do |column| %>
+    <% board.columns.each do |column| %>
       <div class="column">
         <h2 class="columnHeading"><%= column.name %></h2>
       </div>
@@ -10,5 +10,5 @@
   </section>
 </section>
 
-<%= link_to 'Edit', edit_board_path(@board) %> |
+<%= link_to 'Edit', edit_board_path(board) %> |
 <%= link_to 'Back', boards_path %>

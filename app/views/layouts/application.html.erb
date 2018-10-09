@@ -12,6 +12,24 @@
     <%= link_to "psycho", root_path %>
     <%= link_to "new task", new_task_path %>
     <%= link_to "new project", new_project_path %>
+
+    <% @columns.each do |column| %>
+      <% if column.name == 'Done'%>
+        <div class="column" id="done">
+          <h2 class="columnHeading"><%= column.name %></h2>
+        </div>
+      <% elsif column.name == 'Inbox' %>
+        <div class="column" id="inbox">
+          <h2 class="columnHeading"><%= column.name %></h2>
+          <% column.cards.each do |card| %>
+            <div class="card">
+              <p class="cardTitle"><%= card.name %></p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

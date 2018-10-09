@@ -5,12 +5,14 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @projects = Project.all
+    @columns = Column.all
   end
 
   # GET /projects/1
   # GET /projects/1.json
   def show
     @tasks = Task.where(:project_id => @project.id)
+    @columns = Column.all
   end
 
   # GET /projects/new

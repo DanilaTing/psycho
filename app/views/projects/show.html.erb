@@ -4,8 +4,8 @@
 <%= @project.description %>
 <br> <br>
 
-<% @tasks.each do |task| %>
-  <%= task.name %> <br>
+<% @project.boards.first(1).each do |board| %>
+  <%= render 'boards/show', board: board %>
 <% end %>
 
 <br><br>

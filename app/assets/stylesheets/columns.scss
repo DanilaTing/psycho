@@ -21,22 +21,31 @@
       margin-left: 6px;
     }
   }
+}
 
-  #done, #inbox {
-    position: absolute;
+#done, #inbox {
+  width: 250px;
+  min-height: 100px;
+  background-color: rgba(0, 0, 0, .1);
+  position: absolute;
+
+  .columnHeading {
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 6px;
   }
+}
 
-  #done {
-    left: -218px;
-    &:hover {
-      left: 0;
-    }
+#done {
+  left: -218px;
+  &:hover {
+    left: 0;
   }
+}
 
-  #inbox {
-    right: -200px;
-    &:hover {
-      right: 0;
-    }
+#inbox {
+  right: -200px;
+  &:hover {
+    right: 0;
   }
 }
