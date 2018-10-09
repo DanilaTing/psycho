@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181003141512) do
+ActiveRecord::Schema.define(version: 20181009105310) do
 
   create_table "board_in_projects", force: :cascade do |t|
     t.integer "board_id"
@@ -26,6 +26,13 @@ ActiveRecord::Schema.define(version: 20181003141512) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "general"
+  end
+
+  create_table "card_in_columns", force: :cascade do |t|
+    t.integer "column_id"
+    t.integer "card_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "cards", force: :cascade do |t|
