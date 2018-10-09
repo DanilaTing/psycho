@@ -15,5 +15,11 @@
   <%= @column.board_id %>
 </p>
 
+<% @column.cards.each do |card| %>
+  <%= card.name %>
+<% end %>
+
+<br>
+
 <%= link_to 'Edit', edit_column_path(@column) %> |
 <%= link_to 'Back', columns_path %>

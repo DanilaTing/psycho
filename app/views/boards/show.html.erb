@@ -10,6 +10,11 @@
       <% elsif column.name == 'Inbox' %>
         <div class="column" id="inbox">
           <h2 class="columnHeading"><%= column.name %></h2>
+          <% column.cards.each do |card| %>
+            <div class="card">
+              <p class="cardTitle"><%= card.name %></p>
+            </div>
+          <% end %>
         </div>
       <% else %>
         <div class="column">

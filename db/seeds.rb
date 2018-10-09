@@ -104,10 +104,10 @@ end
   puts "Board #{b.name} created"
 end
 
-@columns.each do |column|
-  c = create_column(column)
-  puts "Column #{c.name} created"
-end
+# @columns.each do |column|
+#   c = create_column(column)
+#   puts "Column #{c.name} created"
+# end
 
 finish = Time.now
 duration = finish - start
