@@ -5,6 +5,8 @@ class ColumnsController < ApplicationController
   # GET /columns.json
   def index
     @columns = Column.all
+    @done = Column.where(:name => 'Done')
+    @inbox = Column.where(:name => 'Inbox')
   end
 
   # GET /columns/1
