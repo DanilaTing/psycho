@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181009105310) do
+ActiveRecord::Schema.define(version: 20181015221844) do
+
+  create_table "attachments", force: :cascade do |t|
+    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image"
+    t.string "name"
+    t.boolean "layout"
+    t.string "link"
+  end
 
   create_table "board_in_projects", force: :cascade do |t|
     t.integer "board_id"
@@ -48,6 +58,16 @@ ActiveRecord::Schema.define(version: 20181009105310) do
     t.string "name"
     t.integer "position"
     t.integer "board_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "links", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

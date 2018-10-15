@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :links
+  resources :images
+  resources :attachments
   resources :columns
   resources :boards
   resources :projects do

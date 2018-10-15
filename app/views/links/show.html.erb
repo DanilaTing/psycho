@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<img src="<%= @link_preview.favicon %>" alt="" style="width: 20px;">
+<strong><%= @link_preview.title %></strong>
+<br>
+<%= @link_preview.description %>
+<br>
+<br>
+<%= @link_preview.images %>
+<br>
+
+<%= link_to 'Edit', edit_link_path(@link) %> |
+<%= link_to 'Back', links_path %>
