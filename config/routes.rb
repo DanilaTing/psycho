@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :checklistitems
+  resources :checklists
+  resources :videos
   resources :links
   resources :images
   resources :attachments

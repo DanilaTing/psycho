@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181015221844) do
+ActiveRecord::Schema.define(version: 20181016085427) do
 
   create_table "attachments", force: :cascade do |t|
     t.string "type"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20181015221844) do
     t.string "name"
     t.boolean "layout"
     t.string "link"
+    t.string "video"
   end
 
   create_table "board_in_projects", force: :cascade do |t|
@@ -54,6 +55,20 @@ ActiveRecord::Schema.define(version: 20181015221844) do
     t.integer "project_id"
   end
 
+  create_table "checklistitems", force: :cascade do |t|
+    t.string "name"
+    t.integer "checklist_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "checklists", force: :cascade do |t|
+    t.string "name"
+    t.integer "task_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "columns", force: :cascade do |t|
     t.string "name"
     t.integer "position"
@@ -78,6 +93,11 @@ ActiveRecord::Schema.define(version: 20181015221844) do
   end
 
   create_table "tasks", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "videos", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

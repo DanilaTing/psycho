@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @checklist.name %>
+</p>
+
+<div>
+  <% @checklist.checklistitems.each do |checklistitem| %>
+    <%= checklistitem.name %>
+  <% end %>
+</div>
+
+<%= link_to 'Edit', edit_checklist_path(@checklist) %> |
+<%= link_to 'Back', checklists_path %>

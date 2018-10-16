@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <img src="<%= @link_preview.favicon %>" alt="" style="width: 20px;">
-<strong><%= @link_preview.title %></strong>
+<a href="<%= @link.link %>" target="_blank"><strong><%= @link_preview.title %></strong></a>
 <br>
 <%= @link_preview.description %>
 <br>

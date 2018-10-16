@@ -6,17 +6,20 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.all
     @projects = Project.all
+    @columns = Column.all
   end
 
   # GET /tasks/1
   # GET /tasks/1.json
   def show
     @project = Project.find_by_id(@task.project_id)
+    @columns = Column.all
   end
 
   # GET /tasks/new
   def new
     @task = Task.new
+    @columns = Column.all
   end
 
   # GET /tasks/1/edit

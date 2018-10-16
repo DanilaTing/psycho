@@ -1,0 +1,15 @@
+<%= form_with(model: checklist, local: true) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <br><br>
+  <strong>Checklists</strong>
+  <%= f.fields_for :checklistitems do |c| %>
+    <%= c.label :name %>
+    <%= c.text_field :name %>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
