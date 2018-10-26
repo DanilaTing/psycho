@@ -19,6 +19,8 @@ class CardInColumnsController < ApplicationController
 
   # GET /boards/1/edit
   def edit
+    @columns = Column.all
+    @column = Column.find(params[:column_id])
   end
 
   def new_card_in_column

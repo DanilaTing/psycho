@@ -5,6 +5,11 @@
     <% @columns.each do |column| %>
       <div class="column">
         <h2 class="columnHeading"><%= column.name %></h2>
+        <% column.cards.each do |card| %>
+          <div class="card">
+            <%= link_to card.name, card_path(card.id) %>
+          </div>
+        <% end %>
       </div>
     <% end %>
   </section>

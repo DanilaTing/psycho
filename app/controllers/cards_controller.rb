@@ -5,11 +5,13 @@ class CardsController < ApplicationController
   # GET /cards.json
   def index
     @cards = Card.all
+    @columns = Column.all
   end
 
   # GET /cards/1
   # GET /cards/1.json
   def show
+    @columns = Column.all
   end
 
   # GET /cards/new
@@ -19,6 +21,11 @@ class CardsController < ApplicationController
 
   # GET /cards/1/edit
   def edit
+    @columns = Column.all
+  end
+
+  def turn_into_project
+    params[:type] = 'Project'
   end
 
   # POST /cards
@@ -67,8 +74,12 @@ class CardsController < ApplicationController
       @card = Card.find(params[:id])
     end
 
+    def set_card_in_column
+      @card_in_column = CardInColumn.find(params[:id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def card_params
-      params.require(:card).permit(:name, :description, :type)
+      params.require(:card).permit(:type, :name, :description, :type, card_in_columns_attributes: [:id, :column_id, :card_id])
     end
 end

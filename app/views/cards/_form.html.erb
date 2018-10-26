@@ -21,10 +21,12 @@
     <%= form.text_field :description, id: :card_description %>
   </div>
 
-  <div class="field">
-    <%= form.label :type %>
-    <%= form.text_field :type, id: :card_type %>
-  </div>
+  <%= form.fields_for :card_in_columns do |f| %>
+    <div class="field">
+      <%= f.label :column_id %>
+      <%= f.collection_select :column_id, Column.all, :id, :name %>
+    </div>
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>

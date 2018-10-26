@@ -1,0 +1,8 @@
+<%= form_with(model: card_in_column, local: true) do |form| %>
+
+  <%= select("card_in_column", "column_id", Column.all.collect { |a| [a.name, a.id] }, { include_blank: true }) %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
