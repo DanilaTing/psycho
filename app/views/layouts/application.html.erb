@@ -6,36 +6,10 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%#= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'hello_react' %>
+    <%#= javascript_pack_tag 'Main', columns: @columns  %>
   </head>
 
   <body>
-    <%= link_to "psycho", root_path %>
-    <%= link_to "new task", new_task_path %>
-    <%= link_to "new project", new_project_path %>
-
-    <% @columns.each do |column| %>
-      <% if column.name == 'Done'%>
-        <div class="column" id="done">
-          <h2 class="columnHeading"><%= column.name %></h2>
-          <% column.cards.each do |card| %>
-            <div class="card">
-              <%= link_to card.name, edit_card_path(card.id) %>
-            </div>
-          <% end %>
-        </div>
-      <% elsif column.name == 'Inbox' %>
-        <div class="column" id="inbox">
-          <h2 class="columnHeading"><%= column.name %></h2>
-          <% column.cards.each do |card| %>
-            <div class="card">
-              <%= link_to card.name, edit_card_path(card.id) %>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
-    <% end %>
-
-    <%= yield %>
+    <%= react_component('Main', columns: @columns) %>
   </body>
 </html>
