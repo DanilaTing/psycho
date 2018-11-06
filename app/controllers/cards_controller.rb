@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-  before_action :set_card, only: [:show, :edit, :update, :destroy]
+  before_action :set_card, only: [:show, :edit, :update, :destroy, :turn_into_project]
 
   # GET /cards
   # GET /cards.json
@@ -25,7 +25,21 @@ class CardsController < ApplicationController
   end
 
   def turn_into_project
-    params[:type] = 'Project'
+    # self.params[:type] = 'Project'
+    # self.update(card_params)
+    @card.type = "Project"
+
+    respond_to do |format|
+      if @card.save
+        set_card
+        format.html { redirect_to @card, notice: 'Card was turned into the project.' }
+        # format.html { redirect_to card_path(@card), notice: 'Card was turned into the project.' }
+        format.json { render :show, status: :created, location: @card }
+      else
+        format.html { render :new }
+        format.json { render json: @card.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # POST /cards
@@ -80,6 +94,6 @@ class CardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def card_params
-      params.require(:card).permit(:type, :name, :description, :type, card_in_columns_attributes: [:id, :column_id, :card_id])
+      params.require(:card).permit(:type, :name, :description, card_in_columns_attributes: [:id, :column_id, :card_id])
     end
 end
