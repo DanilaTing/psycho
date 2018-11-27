@@ -1,0 +1,15 @@
+.column {
+  width: 250px;
+  min-height: 100px;
+  background-color: rgba(0, 0, 0, .1);
+
+  &:not(:first-of-type) {
+    margin-left: 10px;
+  }
+
+  .columnHeading {
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 6px;
+  }
+}

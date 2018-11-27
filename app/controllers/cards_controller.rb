@@ -1,5 +1,6 @@
 class CardsController < ApplicationController
   before_action :set_card, only: [:show, :edit, :update, :destroy, :turn_into_project]
+  skip_before_action :verify_authenticity_token
 
   # GET /cards
   # GET /cards.json
@@ -61,10 +62,22 @@ class CardsController < ApplicationController
   # PATCH/PUT /cards/1
   # PATCH/PUT /cards/1.json
   def update
+    logger.debug 'ACTION'
+
+    # if @card.update(card_params)
+    #   logger.debug 'TRUE'
+    #   render json: [@card], status: :ok
+    # else
+    #   logger.debug 'FALSE'
+    #   render json: 'test', status: :unprocessable_entity
+    # end
+
     respond_to do |format|
       if @card.update(card_params)
         format.html { redirect_to @card, notice: 'Card was successfully updated.' }
         format.json { render :show, status: :ok, location: @card }
+        # format.json { render inline: "location.reload();" }
+        # format.json { render json: 'test', status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @card.errors, status: :unprocessable_entity }

@@ -1,0 +1,40 @@
+.O_Menubar {
+  width: 100vw;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #D8D8D8;
+
+  div {
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    &.leftside {
+      margin-left: 20px;
+
+      .M_Tabs {
+        margin-left: 20px;
+      }
+    }
+
+    &.rightside {
+      margin-right: 20px;
+
+      .buttons {
+        margin-right: 30px;
+
+        .A_TextButton {
+          padding-left: 20px;
+        }
+      }
+    }
+  }
+
+  .logo {
+    font-size: 17px;
+    color: #303434;
+    font-weight: bold;
+  }
+}

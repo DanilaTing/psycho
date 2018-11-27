@@ -1,0 +1,9 @@
+.A_TextButton {
+  font-size: 17px;
+  color: black;
+  cursor: pointer;
+
+  &:hover {
+    opacity: .6;
+  }
+}
