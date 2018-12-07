@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+
+  namespace :react do
+    get "tasks", to: "tasks#index"
+    get "projects", to: "projects#index"
+    get "projects/new", to: "projects#new"
+  end
+
+
+
   get 'hello_world', to: 'hello_world#index'
   get 'react', to: 'react#index'
   resources :checklistitems
@@ -26,8 +35,8 @@ Rails.application.routes.draw do
     end
   end
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
-  root "react#index"
   get :new_board_in_project, controller: :board_in_projects
+
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root "react/tasks#index", controller: :react_tasks_controller
 end

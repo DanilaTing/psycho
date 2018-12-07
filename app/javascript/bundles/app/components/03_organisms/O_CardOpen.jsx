@@ -3,12 +3,12 @@ import React from 'react';
 import $ from 'jquery';
 import Turbolinks from 'turbolinks';
 
-export default class O_CardClosed extends React.Component {
+export default class O_CardOpen extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      name: this.props.card.name
+      name: this.props.name
     }
 
     this.saveCard = this.saveCard.bind(this)
@@ -19,6 +19,8 @@ export default class O_CardClosed extends React.Component {
     this.setState({
       name: e.target.value
     })
+
+    this.saveCard(e.target.value)
   }
 
   updateCardName(name) {
@@ -27,9 +29,9 @@ export default class O_CardClosed extends React.Component {
 
   saveCard(e) {
     const { card, triggerCard } = this.props
-    const newCardName = this.state.name
+    const newCardName = e
 
-    const card_link = 'cards/' + card.id
+    const card_link = '../cards/' + card.id
 
     let self = this
 
@@ -40,7 +42,6 @@ export default class O_CardClosed extends React.Component {
       data: { card: { name: newCardName  } },
       success: response => {
         console.log("it worked!", response);
-        triggerCard()
         self.updateCardName(response.name)
       }
     })
@@ -61,9 +62,8 @@ export default class O_CardClosed extends React.Component {
     return (
       <div className="openCardWraper">
         <div className="card open">
-          <input placeholder={ card.name } onChange={ this.changeCardName }></input>
+          <input value={ this.state.name } onChange={ this.changeCardName }></input>
           <div className="close" onClick={ triggerCard }></div>
-          <div className="button" onClick={(e) => this.saveCard(e)}>Save</div>
         </div>
       </div>
     )

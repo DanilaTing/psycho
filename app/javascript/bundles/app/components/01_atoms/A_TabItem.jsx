@@ -7,19 +7,23 @@ export default class A_TabItem extends React.Component {
   }
 
   render() {
-    const { text, link, active } = this.props.tab
+    const { text, link, activeTab } = this.props.tab
 
-    if (active == true) {
+    if (activeTab == text) {
       return (
-        <div className="A_TabItem active">
-          { text }
-        </div>
+        <a href={ link }>
+          <div className="A_TabItem active">
+            { text }
+          </div>
+        </a>
       )
     } else {
       return (
-        <div className="A_TabItem">
-          { text }
-        </div>
+        <a href={ link }>
+          <div className="A_TabItem">
+            { text }
+          </div>
+        </a>
       )
     }
   }

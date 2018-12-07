@@ -1,15 +1,48 @@
+.columns {
+  display: flex;
+  overflow: scroll;
+  width: 90vw;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 .column {
-  width: 250px;
+  background-color: #F4F4F4;
+  min-width: 250px;
   min-height: 100px;
-  background-color: rgba(0, 0, 0, .1);
 
   &:not(:first-of-type) {
     margin-left: 10px;
   }
 
   .columnHeading {
-    font-size: 14px;
-    font-weight: 600;
-    margin-left: 6px;
+    font-size: 17px;
+    font-weight: normal;
+    line-height: 24px;
+    letter-spacing: 0.4px;
+    padding: 10px;
+  }
+}
+
+.general {
+  position: absolute;
+  margin-left: 0 !important;
+}
+
+.done {
+  left: -200px;
+
+  &:hover {
+    left: 0;
+  }
+}
+
+.inbox {
+  right: -200px;
+
+  &:hover {
+    right: 0;
   }
 }

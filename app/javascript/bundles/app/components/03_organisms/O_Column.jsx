@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import O_CardClosed from '../03_organisms/O_CardClosed';
+import O_Card from '../03_organisms/O_Card';
+import Turbolinks from 'turbolinks';
 
 export default class O_Column extends React.Component {
   constructor(props) {
@@ -13,9 +14,9 @@ export default class O_Column extends React.Component {
 
     cardInColumns.map((cardInColumn, i) => {
       cards.map((card, i) => {
-        if (cardInColumn.card_id == card.id && cardInColumn.column_id == column.id && card.type != 'project') {
+        if (cardInColumn.card_id == card.id && cardInColumn.column_id == column.id) {
           columnCards.push (
-            <O_CardClosed
+            <O_Card
               card={ card }
               key={ i }
               open={ false }
@@ -31,11 +32,27 @@ export default class O_Column extends React.Component {
   render() {
     const { name } = this.props.column
 
-    return (
-      <div className="column">
-        <p className="columnHeading">{ name }</p>
-        { this.renderCards() }
-      </div>
-    );
+    if (name == "Done") {
+      return (
+        <div className="column general done">
+          <p className="columnHeading">{ name }</p>
+          { this.renderCards() }
+        </div>
+      );
+    } else if (name == "Inbox") {
+      return (
+        <div className="column general inbox">
+          <p className="columnHeading">{ name }</p>
+          { this.renderCards() }
+        </div>
+      );
+    } else {
+      return (
+        <div className="column">
+          <p className="columnHeading">{ name }</p>
+          { this.renderCards() }
+        </div>
+      );
+    }
   }
 }

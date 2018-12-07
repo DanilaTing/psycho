@@ -3,7 +3,7 @@ import React from 'react';
 import O_Menubar from '../03_organisms/O_Menubar';
 import O_Column from '../03_organisms/O_Column';
 
-export default class Main extends React.Component {
+export default class Projects extends React.Component {
   static propTypes = {
   };
 
@@ -37,9 +37,8 @@ export default class Main extends React.Component {
 
     return (
       <section>
-        <O_Menubar/>
-        <div className="board">
-          { board.name }
+        <O_Menubar activeTab="Projects"/>
+        <div className="O_Board">
           <div className="columns">
             { this.renderGeneralBoard() }
           </div>

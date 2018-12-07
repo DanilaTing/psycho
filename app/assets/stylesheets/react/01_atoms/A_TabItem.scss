@@ -1,18 +1,22 @@
+a {
+  text-decoration: none;
+}
+
 .A_TabItem {
   height: 100%;
-  color: #9B9B9B;
   border-bottom: 1px solid #D8D8D8;
   cursor: pointer;
   padding-left: 15px;
   padding-right: 15px;
+  color: #9B9B9B;
 
   &.active {
-    color: black;
     border-bottom: 1px solid black;
+    color: black;
   }
 
   &:hover {
-    color: black;
     border-bottom: 1px solid black;
+    color: black;
   }
 }
