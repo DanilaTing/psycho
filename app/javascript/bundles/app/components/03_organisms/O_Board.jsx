@@ -9,7 +9,7 @@ export default class O_Board extends React.Component {
 
   renderColumns() {
     const { columns } = this.props
-
+ 
     const htmlElements = []
 
     columns.map((column, i) => {

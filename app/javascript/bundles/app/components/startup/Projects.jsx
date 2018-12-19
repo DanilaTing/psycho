@@ -6,7 +6,6 @@ import O_Column from '../03_organisms/O_Column';
 export default class Projects extends React.Component {
   static propTypes = {
   };
-
   /**
    * @param props - Comes from your rails view.
    */

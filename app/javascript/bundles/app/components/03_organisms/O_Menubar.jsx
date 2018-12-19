@@ -22,7 +22,7 @@ export default class O_Menubar extends React.Component {
         link: '../react/projects',
         activeTab: activeTab
       }
-    ]
+    ] 
     return (
       <section className="O_Menubar">
         <div className="leftside">

@@ -8,7 +8,7 @@ export default class A_Avatar extends React.Component {
 
   render() {
     return (
-      <div className="A_Avatar">
+      <div className="A_Avatar"> 
       </div>
     );
   }
