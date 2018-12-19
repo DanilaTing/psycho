@@ -8,11 +8,13 @@ export default class O_CardOpen extends React.Component {
     super(props);
 
     this.state = {
-      name: this.props.name
+      name: this.props.name,
+      description: this.props.description
     }
 
     this.saveCard = this.saveCard.bind(this)
     this.changeCardName = this.changeCardName.bind(this)
+    // this.changeCardDescription = this.changeCardDescription.bind(this)
   }
 
   changeCardName(e) {
@@ -63,6 +65,8 @@ export default class O_CardOpen extends React.Component {
       <div className="openCardWraper">
         <div className="card open">
           <input value={ this.state.name } onChange={ this.changeCardName }></input>
+          <input value={ this.state.description } ></input>
+          <div><p>{this.state.description}</p></div>
           <div className="close" onClick={ triggerCard }></div>
         </div>
       </div>
