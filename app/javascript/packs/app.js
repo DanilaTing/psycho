@@ -8,5 +8,5 @@ import NewProject from '../bundles/app/components/startup/NewProject';
 ReactOnRails.register({
   Tasks,
   Projects,
-  NewProject
+  NewProject,
 });
