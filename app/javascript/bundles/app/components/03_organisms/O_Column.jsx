@@ -30,28 +30,34 @@ export default class O_Column extends React.Component {
   }
 
   render() {
-    const { name } = this.props.column
+    const { name, id } = this.props.column
 
     if (name == "Done") {
       return (
         <div className="column general done">
           <p className="columnHeading">{ name }</p>
-          { this.renderCards() }
+          <div className="cardsWrapper">
+            { this.renderCards() }
+          </div>
         </div>
       );
     } else if (name == "Inbox") {
       return (
         <div className="column general inbox">
           <p className="columnHeading">{ name }</p>
-          { this.renderCards() }
+          <div className="cardsWrapper">
+            { this.renderCards() }
+          </div>
         </div>
       );
     } else {
       return (
         <div className="column">
           <p className="columnHeading">{ name }</p>
-          { this.renderCards() }
-          <div className="addTaskInColumn">Add a task...</div>
+          <div className="cardsWrapper">
+            { this.renderCards() }
+          </div>
+          <div className="addTaskInColumn" onClick={ ()=>this.props.renderNewTask(id) }>Add a task...</div>
         </div>
 
       );

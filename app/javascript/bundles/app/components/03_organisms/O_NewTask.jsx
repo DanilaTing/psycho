@@ -47,7 +47,7 @@ export default class O_NewTask extends React.Component {
         {
           name: newCardName,
           description: newCardDescription,
-          type: 'Task'
+          type: 'Task',
         },
       },
       success: response => {
@@ -57,7 +57,45 @@ export default class O_NewTask extends React.Component {
     .done(function() {
       console.log( "success" );
       self.props.closeNewTask()
+      self.updateCardInColumn()
       window.location.reload()
+    })
+    .fail(function() {
+      console.log( "error" );
+    })
+    .always(function() {
+      console.log( "complete" );
+    });
+  }
+
+  updateCardInColumn() {
+    const cardInColumnIds = []
+    this.props.cardInColumns.map((cardInColumn) => {
+      cardInColumnIds.push(
+        cardInColumn.id
+      )
+    })
+    console.log(cardInColumnIds);
+    const newId = Math.max.apply(null, cardInColumnIds) + 1
+    console.log('newId ' + newId);
+
+    const columnId = this.props.columnId
+
+    $.ajax({
+      dataType: 'JSON',
+      url: '../card_in_columns/' + newId,
+      type: "PATCH",
+      data: { card_in_column:
+        {
+          column_id: columnId,
+        },
+      },
+      success: response => {
+        console.log("it worked!", response);
+      }
+    })
+    .done(function() {
+      console.log( "success" );
     })
     .fail(function() {
       console.log( "error" );
@@ -71,10 +109,10 @@ export default class O_NewTask extends React.Component {
     return (
       <div className="openCardWraper">
         <div className="card open">
-          <input placeholder='New Task' value={ this.state.name } onChange={ this.changeCardName }></input>
-          <input placeholder='Description' value={ this.state.description } onChange={ this.changeCardDescription }></input>
+          <input autoFocus className="M_TextInput name" placeholder='New Task' value={ this.state.name } onChange={ this.changeCardName }></input>
+          <input className="M_TextInput description" placeholder='Description' value={ this.state.description } onChange={ this.changeCardDescription }></input>
           <div className="close" onClick={ this.props.closeNewTask }></div>
-          <div className="submit" onClick={ this.saveCard }>Create</div>
+          <div className="A_Button" onClick={ this.saveCard }>Create</div>
         </div>
       </div>
     )

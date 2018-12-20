@@ -11,6 +11,7 @@ export default class O_Menubar extends React.Component {
 
   render() {
     const { activeTab, renderNewTask, closeNewTask } = this.props
+    const id = 7
 
     let tabs = [
       {
@@ -22,7 +23,7 @@ export default class O_Menubar extends React.Component {
         link: '../react/projects',
         activeTab: activeTab
       }
-    ] 
+    ]
     return (
       <section className="O_Menubar">
         <div className="leftside">
@@ -32,7 +33,7 @@ export default class O_Menubar extends React.Component {
 
         <div className="rightside">
           <div className="buttons">
-            <A_TextButton text="New Task" action={ renderNewTask }/>
+            <A_TextButton text="New Task" action={ ()=>renderNewTask(id) }/>
             <A_TextButton text="New Project" link="projects/new"/>
           </div>
           <A_Avatar/>

@@ -20,21 +20,24 @@ export default class Tasks extends React.Component {
     this.closeNewTask = this.closeNewTask.bind(this)
 
     this.state = {
-      newTaskVisible: false
+      newTaskVisible: false,
+      columnFromWhereCreated: 7
     }
   }
 
-  renderNewTask() {
+  renderNewTask(id) {
     console.log('new task rendered');
 
     this.setState({
-      newTaskVisible: true
+      newTaskVisible: true,
+      columnFromWhereCreated: id
     })
   }
 
   closeNewTask() {
     this.setState({
-      newTaskVisible: false
+      newTaskVisible: false,
+      columnFromWhereCreated: 7
     })
   }
 
@@ -51,6 +54,7 @@ export default class Tasks extends React.Component {
             cards={ cards }
             key={ i }
             cardInColumns={ cardInColumns }
+            renderNewTask={ this.renderNewTask }
           />
         )
       }
@@ -100,11 +104,11 @@ export default class Tasks extends React.Component {
   }
 
   render() {
-    const { board } = this.props
+    const { board, cardInColumns } = this.props
 
     return (
       <section>
-        { this.state.newTaskVisible ? (<O_NewTask closeNewTask={ this.closeNewTask }/>) : ''}
+        { this.state.newTaskVisible ? (<O_NewTask closeNewTask={ this.closeNewTask } cardInColumns={ cardInColumns } columnId={ this.state.columnFromWhereCreated }/>) : ''}
         <O_Menubar activeTab="Tasks" renderNewTask={ this.renderNewTask }/>
         <div className="O_Board">
           { this.rednerDoneColumn() }

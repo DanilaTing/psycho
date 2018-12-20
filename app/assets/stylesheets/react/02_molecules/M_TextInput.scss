@@ -1,0 +1,22 @@
+.M_TextInput {
+  font-family: Helvetica;
+  display: block;
+
+  &.name {
+    font-size: 26px;
+    line-height: 40px;
+    margin-left: 60px;
+    margin-top: 60px;
+  }
+
+  &.description {
+    font-size: 18px;
+    line-height: 22px;
+    margin-left: 60px;
+    margin-top: 40px;
+  }
+
+  &:focus {
+    outline: none
+  }
+}

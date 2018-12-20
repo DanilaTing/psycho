@@ -106,8 +106,8 @@ export default class O_CardOpen extends React.Component {
     return (
       <div className="openCardWraper">
         <div className="card open">
-          <input value={ this.state.name } onChange={ this.changeCardName }></input>
-          <input value={ this.state.description } placeholder="Description" onChange={ this.changeCardDescription }></input>
+          <input className="M_TextInput name" placeholder='New Task' value={ this.state.name } onChange={ this.changeCardName }></input>
+          <input className="M_TextInput description" placeholder='Description' value={ this.state.description } onChange={ this.changeCardDescription }></input>
           <div className="close" onClick={ triggerCard }></div>
         </div>
       </div>
