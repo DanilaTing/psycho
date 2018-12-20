@@ -50,17 +50,19 @@
 
   &.open input {
     font-family: Helvetica;
-    font-size: 36px;
+    font-size: 26px;
     margin-left: 60px;
     margin-top: 60px;
+  }
+
+  input:focus {
+  outline: none
   }
 
   .close {
     width: 20px;
     height: 20px;
     opacity: 0.3;
-
-
     position: absolute;
     top: 40px;
     right: 50px;
