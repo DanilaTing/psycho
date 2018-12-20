@@ -1,0 +1,745 @@
+/*! normalize.css v4.1.1 | MIT License | github.com/necolas/normalize.css */
+/**
+ * 1. Change the default font family in all browsers (opinionated).
+ * 2. Prevent adjustments of font size after orientation changes in IE and iOS.
+ */
+/* line 8, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+html {
+  font-family: sans-serif;
+  /* 1 */
+  -ms-text-size-adjust: 100%;
+  /* 2 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+}
+
+/**
+ * Remove the margin in all browsers (opinionated).
+ */
+/* line 18, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+body {
+  margin: 0;
+}
+
+/* HTML5 display definitions
+   ========================================================================== */
+/**
+ * Add the correct display in IE 9-.
+ * 1. Add the correct display in Edge, IE, and Firefox.
+ * 2. Add the correct display in IE.
+ */
+/* line 31, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+main,
+menu,
+nav,
+section,
+summary {
+  /* 1 */
+  display: block;
+}
+
+/**
+ * Add the correct display in IE 9-.
+ */
+/* line 50, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+}
+
+/**
+ * Add the correct display in iOS 4-7.
+ */
+/* line 61, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/**
+ * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+/* line 70, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+progress {
+  vertical-align: baseline;
+}
+
+/**
+ * Add the correct display in IE 10-.
+ * 1. Add the correct display in IE.
+ */
+/* line 79, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+template,
+[hidden] {
+  display: none;
+}
+
+/* Links
+   ========================================================================== */
+/**
+ * 1. Remove the gray background on active links in IE 10.
+ * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.
+ */
+/* line 92, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+a {
+  background-color: transparent;
+  /* 1 */
+  -webkit-text-decoration-skip: objects;
+  /* 2 */
+}
+
+/**
+ * Remove the outline on focused links when they are also active or hovered
+ * in all browsers (opinionated).
+ */
+/* line 102, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+a:active,
+a:hover {
+  outline-width: 0;
+}
+
+/* Text-level semantics
+   ========================================================================== */
+/**
+ * 1. Remove the bottom border in Firefox 39-.
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
+/* line 115, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+abbr[title] {
+  border-bottom: none;
+  /* 1 */
+  text-decoration: underline;
+  /* 2 */
+  text-decoration: underline dotted;
+  /* 2 */
+}
+
+/**
+ * Prevent the duplicate application of `bolder` by the next rule in Safari 6.
+ */
+/* line 125, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+b,
+strong {
+  font-weight: inherit;
+}
+
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+/* line 134, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+b,
+strong {
+  font-weight: bolder;
+}
+
+/**
+ * Add the correct font style in Android 4.3-.
+ */
+/* line 143, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+dfn {
+  font-style: italic;
+}
+
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+/* line 152, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/**
+ * Add the correct background and color in IE 9-.
+ */
+/* line 161, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+mark {
+  background-color: #ff0;
+  color: #000;
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+/* line 170, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
+/* line 179, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+/* line 187, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+sub {
+  bottom: -0.25em;
+}
+
+/* line 191, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+sup {
+  top: -0.5em;
+}
+
+/* Embedded content
+   ========================================================================== */
+/**
+ * Remove the border on images inside links in IE 10-.
+ */
+/* line 202, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+img {
+  border-style: none;
+}
+
+/**
+ * Hide the overflow in IE.
+ */
+/* line 210, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* Grouping content
+   ========================================================================== */
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+/* line 222, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  /* 1 */
+  font-size: 1em;
+  /* 2 */
+}
+
+/**
+ * Add the correct margin in IE 8.
+ */
+/* line 234, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+figure {
+  margin: 1em 40px;
+}
+
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ */
+/* line 243, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+hr {
+  box-sizing: content-box;
+  /* 1 */
+  height: 0;
+  /* 1 */
+  overflow: visible;
+  /* 2 */
+}
+
+/* Forms
+   ========================================================================== */
+/**
+ * 1. Change font properties to `inherit` in all browsers (opinionated).
+ * 2. Remove the margin in Firefox and Safari.
+ */
+/* line 257, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  /* 1 */
+  margin: 0;
+  /* 2 */
+}
+
+/**
+ * Restore the font weight unset by the previous rule.
+ */
+/* line 269, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+optgroup {
+  font-weight: bold;
+}
+
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+/* line 278, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+button,
+input {
+  /* 1 */
+  overflow: visible;
+}
+
+/**
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+/* line 288, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+button,
+select {
+  /* 1 */
+  text-transform: none;
+}
+
+/**
+ * 1. Prevent a WebKit bug where (2) destroys native `audio` and `video`
+ *    controls in Android 4.
+ * 2. Correct the inability to style clickable types in iOS and Safari.
+ */
+/* line 299, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+button,
+html [type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+  /* 2 */
+}
+
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+/* line 310, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+ * Restore the focus styles unset by the previous rule.
+ */
+/* line 322, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Change the border, margin, and padding in all browsers (opinionated).
+ */
+/* line 333, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+/* line 346, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+legend {
+  box-sizing: border-box;
+  /* 1 */
+  color: inherit;
+  /* 2 */
+  display: table;
+  /* 1 */
+  max-width: 100%;
+  /* 1 */
+  padding: 0;
+  /* 3 */
+  white-space: normal;
+  /* 1 */
+}
+
+/**
+ * Remove the default vertical scrollbar in IE.
+ */
+/* line 359, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+textarea {
+  overflow: auto;
+}
+
+/**
+ * 1. Add the correct box sizing in IE 10-.
+ * 2. Remove the padding in IE 10-.
+ */
+/* line 368, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0;
+  /* 2 */
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+/* line 378, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+/* line 388, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+[type="search"] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  outline-offset: -2px;
+  /* 2 */
+}
+
+/**
+ * Remove the inner padding and cancel buttons in Chrome and Safari on OS X.
+ */
+/* line 397, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+[type="search"]::-webkit-search-cancel-button,
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * Correct the text style of placeholders in Chrome, Edge, and Safari.
+ */
+/* line 406, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+::-webkit-input-placeholder {
+  color: inherit;
+  opacity: 0.54;
+}
+
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+/* line 416, /Users/danilatimofeev/.rbenv/versions/2.4.2/lib/ruby/gems/2.4.0/gems/normalize-rails-4.1.1/vendor/assets/stylesheets/normalize-rails/normalize.css */
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  /* 1 */
+  font: inherit;
+  /* 2 */
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+
+ */
+
+
+@import 'reset.css';
+/* line 5, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/main.scss */
+body {
+  overflow-x: hidden;
+}
+/* line 1, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/01_atoms/A_Avatar.scss */
+.A_Avatar {
+  min-width: 40px;
+  min-height: 40px;
+  max-width: 40px;
+  max-height: 40px;
+  background-color: #D8D8D8;
+  border-radius: 100px;
+}
+/* line 1, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/01_atoms/A_TabItem.scss */
+a {
+  text-decoration: none;
+}
+
+/* line 5, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/01_atoms/A_TabItem.scss */
+.A_TabItem {
+  height: 100%;
+  border-bottom: 1px solid #D8D8D8;
+  cursor: pointer;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: #9B9B9B;
+}
+/* line 13, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/01_atoms/A_TabItem.scss */
+.A_TabItem.active {
+  border-bottom: 1px solid black;
+  color: black;
+}
+/* line 18, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/01_atoms/A_TabItem.scss */
+.A_TabItem:hover {
+  border-bottom: 1px solid black;
+  color: black;
+}
+/* line 1, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/01_atoms/A_TextButton.scss */
+.A_TextButton {
+  font-size: 17px;
+  cursor: pointer;
+}
+/* line 5, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/01_atoms/A_TextButton.scss */
+.A_TextButton:hover {
+  opacity: .6;
+}
+/* line 9, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/01_atoms/A_TextButton.scss */
+.A_TextButton a {
+  color: black;
+}
+/* line 1, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/02_molecules/M_Tabs.scss */
+.M_Tabs {
+  display: flex;
+  height: 100%;
+}
+/* line 1, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/03_organisms/O_Board.scss */
+.O_Board {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  overflow-x: hidden;
+}
+/* line 1, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/03_organisms/O_Card.scss */
+.openCardWraper {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.3);
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+/* line 16, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/03_organisms/O_Card.scss */
+.card {
+  width: 90%;
+  margin-left: 5%;
+  background-color: white;
+  box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  margin-bottom: 6px;
+}
+/* line 28, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/03_organisms/O_Card.scss */
+.card .content {
+  padding: 10px;
+}
+/* line 32, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/03_organisms/O_Card.scss */
+.card.closed {
+  cursor: pointer;
+}
+/* line 36, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/03_organisms/O_Card.scss */
+.card.open {
+  width: 500px;
+  height: 400px;
+  position: relative;
+}
+/* line 42, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/03_organisms/O_Card.scss */
+.card .close {
+  width: 20px;
+  height: 20px;
+  background-color: black;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+/* line 53, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/03_organisms/O_Card.scss */
+.card .button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 50px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+/* line 67, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/03_organisms/O_Card.scss */
+.card input {
+  margin-top: 10px;
+  margin-left: 10px;
+  border: none;
+}
+/* line 1, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/03_organisms/O_Column.scss */
+.columns {
+  display: flex;
+  overflow: scroll;
+  width: 90vw;
+}
+/* line 6, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/03_organisms/O_Column.scss */
+.columns::-webkit-scrollbar {
+  display: none;
+}
+
+/* line 11, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/03_organisms/O_Column.scss */
+.column {
+  background-color: #F4F4F4;
+  min-width: 250px;
+  min-height: 100px;
+}
+/* line 16, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/03_organisms/O_Column.scss */
+.column:not(:first-of-type) {
+  margin-left: 10px;
+}
+/* line 20, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/03_organisms/O_Column.scss */
+.column .columnHeading {
+  font-size: 17px;
+  font-weight: normal;
+  line-height: 24px;
+  letter-spacing: 0.4px;
+  padding: 10px;
+}
+
+/* line 29, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/03_organisms/O_Column.scss */
+.general {
+  position: absolute;
+  margin-left: 0 !important;
+}
+
+/* line 34, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/03_organisms/O_Column.scss */
+.done {
+  left: -200px;
+}
+/* line 37, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/03_organisms/O_Column.scss */
+.done:hover {
+  left: 0;
+}
+
+/* line 42, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/03_organisms/O_Column.scss */
+.inbox {
+  right: -200px;
+}
+/* line 45, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/03_organisms/O_Column.scss */
+.inbox:hover {
+  right: 0;
+}
+/* line 1, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/03_organisms/O_Menubar.scss */
+.O_Menubar {
+  width: 100vw;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #D8D8D8;
+}
+/* line 9, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/03_organisms/O_Menubar.scss */
+.O_Menubar div {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+/* line 14, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/03_organisms/O_Menubar.scss */
+.O_Menubar div.leftside {
+  margin-left: 20px;
+}
+/* line 17, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/03_organisms/O_Menubar.scss */
+.O_Menubar div.leftside .M_Tabs {
+  margin-left: 20px;
+}
+/* line 22, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/03_organisms/O_Menubar.scss */
+.O_Menubar div.rightside {
+  margin-right: 20px;
+}
+/* line 25, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/03_organisms/O_Menubar.scss */
+.O_Menubar div.rightside .buttons {
+  margin-right: 30px;
+}
+/* line 28, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/03_organisms/O_Menubar.scss */
+.O_Menubar div.rightside .buttons .A_TextButton {
+  padding-left: 20px;
+}
+/* line 35, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/03_organisms/O_Menubar.scss */
+.O_Menubar .logo {
+  font-size: 17px;
+  color: #303434;
+  font-weight: bold;
+}
+/* line 1, /Users/danilatimofeev/GitHub/psycho/app/assets/stylesheets/react/fonts.scss */
+body {
+  font-family: 'Helvetica Neue' !important;
+}
+/* http://meyerweb.com/eric/tools/css/reset/
+   v4.0 | 20180602
+   License: none (public domain)
+*/
+
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+main, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, main, menu, nav, section {
+	display: block;
+}
+/* HTML5 hidden-attribute fix for newer browsers */
+*[hidden] {
+    display: none;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
