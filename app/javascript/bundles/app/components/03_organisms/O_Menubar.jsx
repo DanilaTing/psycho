@@ -10,7 +10,7 @@ export default class O_Menubar extends React.Component {
   }
 
   render() {
-    const { activeTab } = this.props
+    const { activeTab, renderNewTask, closeNewTask } = this.props
 
     let tabs = [
       {
@@ -32,7 +32,7 @@ export default class O_Menubar extends React.Component {
 
         <div className="rightside">
           <div className="buttons">
-            <A_TextButton text="New Task"/>
+            <A_TextButton text="New Task" action={ renderNewTask }/>
             <A_TextButton text="New Project" link="projects/new"/>
           </div>
           <A_Avatar/>

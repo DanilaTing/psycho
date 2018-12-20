@@ -8,11 +8,14 @@ export default class O_CardOpen extends React.Component {
     super(props);
 
     this.state = {
-      name: this.props.name
+      name: this.props.name,
+      description: this.props.description
     }
 
-    this.saveCard = this.saveCard.bind(this)
+    this.saveCardName = this.saveCardName.bind(this)
+    this.saveCardDescription = this.saveCardDescription.bind(this)
     this.changeCardName = this.changeCardName.bind(this)
+    this.changeCardDescription = this.changeCardDescription.bind(this)
   }
 
   changeCardName(e) {
@@ -20,14 +23,26 @@ export default class O_CardOpen extends React.Component {
       name: e.target.value
     })
 
-    this.saveCard(e.target.value)
+    this.saveCardName(e.target.value)
+  }
+
+  changeCardDescription(e) {
+    this.setState({
+      description: e.target.value
+    })
+
+    this.saveCardDescription(e.target.value)
   }
 
   updateCardName(name) {
     this.props.updateCardName(name)
   }
 
-  saveCard(e) {
+  updateCardDescprition(name) {
+    this.props.updateCardDescprition(name)
+  }
+
+  saveCardName(e) {
     const { card, triggerCard } = this.props
     const newCardName = e
 
@@ -56,6 +71,35 @@ export default class O_CardOpen extends React.Component {
     });
   }
 
+  saveCardDescription(e) {
+    const { card, triggerCard } = this.props
+    const newCardDescription = e
+
+    const card_link = '../cards/' + card.id
+
+    let self = this
+
+    $.ajax({
+      dataType: 'JSON',
+      url: card_link,
+      type: "PATCH",
+      data: { card: { description: newCardDescription  } },
+      success: response => {
+        console.log("it worked!", response);
+        self.updateCardDescprition(response.description)
+      }
+    })
+    .done(function() {
+      console.log( "success" );
+    })
+    .fail(function() {
+      console.log( "error" );
+    })
+    .always(function() {
+      console.log( "complete" );
+    });
+  }
+
   render() {
     const { card, triggerCard } = this.props
 
@@ -63,6 +107,7 @@ export default class O_CardOpen extends React.Component {
       <div className="openCardWraper">
         <div className="card open">
           <input value={ this.state.name } onChange={ this.changeCardName }></input>
+          <input value={ this.state.description } placeholder="Description" onChange={ this.changeCardDescription }></input>
           <div className="close" onClick={ triggerCard }></div>
         </div>
       </div>
