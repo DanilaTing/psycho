@@ -21,7 +21,7 @@ export default class Tasks extends React.Component {
 
     this.state = {
       newTaskVisible: false,
-      columnFromWhereCreated: 7
+      columnFromWhereCreated: 6
     }
   }
 
@@ -37,7 +37,7 @@ export default class Tasks extends React.Component {
   closeNewTask() {
     this.setState({
       newTaskVisible: false,
-      columnFromWhereCreated: 7
+      columnFromWhereCreated: 6
     })
   }
 

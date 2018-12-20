@@ -11,7 +11,7 @@ export default class O_Menubar extends React.Component {
 
   render() {
     const { activeTab, renderNewTask, closeNewTask } = this.props
-    const id = 7
+    const id = 6
 
     let tabs = [
       {
