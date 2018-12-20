@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20181016085427) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "attachments", force: :cascade do |t|
     t.string "type"
     t.datetime "created_at", null: false

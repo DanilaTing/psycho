@@ -12,7 +12,7 @@ export default class O_CardClosed extends React.Component {
     const { triggerCard, name } = this.props
 
     return (
-      <div className="card closed" onClick={ triggerCard }>
+      <div className="card closed" onClick={ triggerCard } draggable={true}>
         <div className="content">
           <p>{ name }</p>
         </div>
