@@ -51,7 +51,9 @@ export default class O_Column extends React.Component {
         <div className="column">
           <p className="columnHeading">{ name }</p>
           { this.renderCards() }
+          <div className="addTaskInColumn">Create task</div>
         </div>
+
       );
     }
   }

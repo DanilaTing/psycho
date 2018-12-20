@@ -2,13 +2,14 @@
   display: flex;
   overflow: scroll;
   width: 90vw;
-  
+
   &::-webkit-scrollbar {
     display: none;
   }
 }
 
 .column {
+  position: relative;
   background-color: #F4F4F4;
   min-width: 250px;
   min-height: 100px;
@@ -45,4 +46,28 @@
   &:hover {
     right: 0;
   }
+}
+
+.addTaskInColumn {
+
+  position: absolute;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  bottom: 0;
+  width: 100%;
+
+  font-size: 17px;
+  font-weight: 300;
+  color: #9B9B9B;
+  text-align: center;
+  cursor: pointer;
+
+}
+
+
+.addTaskInColumn:hover {
+    background-color: #cdd2d4;
+    color: #4d4d4d;
+    text-decoration: underline;
+
 }
