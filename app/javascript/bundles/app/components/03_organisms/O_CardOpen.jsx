@@ -14,8 +14,10 @@ export default class O_CardOpen extends React.Component {
 
     this.saveCardName = this.saveCardName.bind(this)
     this.saveCardDescription = this.saveCardDescription.bind(this)
+    this.deleteCard = this.deleteCard.bind(this)
     this.changeCardName = this.changeCardName.bind(this)
     this.changeCardDescription = this.changeCardDescription.bind(this)
+    this.turnIntoProject = this.turnIntoProject.bind(this)
   }
 
   changeCardName(e) {
@@ -100,6 +102,61 @@ export default class O_CardOpen extends React.Component {
     });
   }
 
+  deleteCard() {
+    const { card } = this.props
+
+    const card_link = '../cards/' + card.id
+
+    let self = this
+
+    $.ajax({
+      dataType: 'JSON',
+      url: card_link,
+      type: "DELETE",
+      success: response => {
+        console.log("it worked!", response);
+        window.location.reload()
+      }
+    })
+    .done(function() {
+      console.log( "success" );
+    })
+    .fail(function() {
+      console.log( "error" );
+    })
+    .always(function() {
+      console.log( "complete" );
+    });
+  }
+
+  turnIntoProject() {
+    const { card } = this.props
+
+    const card_link = '../cards/' + card.id
+
+    let self = this
+
+    $.ajax({
+      dataType: 'JSON',
+      url: card_link,
+      type: "PATCH",
+      data: { card: { type: 'Project'  } },
+      success: response => {
+        console.log("it worked!", response);
+      }
+    })
+    .done(function() {
+      console.log( "success" );
+      window.location = "../../react/projects";
+    })
+    .fail(function() {
+      console.log( "error" );
+    })
+    .always(function() {
+      console.log( "complete" );
+    });
+  }
+
   render() {
     const { card, triggerCard } = this.props
 
@@ -107,8 +164,12 @@ export default class O_CardOpen extends React.Component {
       <div className="openCardWraper">
         <div className="card open">
           <input className="M_TextInput name" placeholder='New Task' value={ this.state.name } onChange={ this.changeCardName }></input>
-          <input className="M_TextInput description" placeholder='Description' value={ this.state.description } onChange={ this.changeCardDescription }></input>
+          <textarea className="M_TextInput description" placeholder='Description' value={ this.state.description } onChange={ this.changeCardDescription }></textarea>
           <div className="close" onClick={ triggerCard }></div>
+          <div className="M_CardActions">
+            <div className="A_TextButton delete" onClick={ this.deleteCard }>Delete</div>
+            <div className="A_TextButton turnIntoProject" onClick={ this.turnIntoProject }>Turn Into Project</div>
+          </div>
         </div>
       </div>
     )

@@ -110,7 +110,7 @@ export default class O_NewTask extends React.Component {
       <div className="openCardWraper">
         <div className="card open">
           <input autoFocus className="M_TextInput name" placeholder='New Task' value={ this.state.name } onChange={ this.changeCardName }></input>
-          <input className="M_TextInput description" placeholder='Description' value={ this.state.description } onChange={ this.changeCardDescription }></input>
+          <textarea className="M_TextInput description" placeholder='Description' value={ this.state.description } onChange={ this.changeCardDescription }></textarea>
           <div className="close" onClick={ this.props.closeNewTask }></div>
           <div className="A_Button" onClick={ this.saveCard }>Create</div>
         </div>

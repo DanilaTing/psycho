@@ -6,5 +6,10 @@
   background-color: #418dff;
   color: white;
   border-radius: 3px;
-  cursor: pointer;  
+  cursor: pointer;
+
+  &.inactive {
+    cursor: auto;
+    background-color: grey;
+  }
 }
