@@ -10,12 +10,10 @@ export default class O_Card extends React.Component {
 
     this.triggerCard = this.triggerCard.bind(this)
     this.updateCardName = this.updateCardName.bind(this)
-    this.updateCardDescprition = this.updateCardDescprition.bind(this)
 
     this.state = {
       open: this.props.open,
-      name: this.props.card.name,
-      description: this.props.card.description
+      name: this.props.card.name
     }
   }
 
@@ -31,12 +29,6 @@ export default class O_Card extends React.Component {
     })
   }
 
-  updateCardDescprition(description) {
-    this.setState({
-      description: description
-    })
-  }
-
   render() {
     const { open, name } = this.state
     const { card } = this.props
@@ -49,7 +41,7 @@ export default class O_Card extends React.Component {
       return (
         <div>
           <O_CardClosed triggerCard={ this.triggerCard } name={ this.state.name }/>
-          <O_CardOpen triggerCard={ this.triggerCard } card={ card } name={ this.state.name } description={ this.state.description } updateCardName={ this.updateCardName } updateCardDescprition={ this.updateCardDescprition } />
+          <O_CardOpen triggerCard={ this.triggerCard } card={ card } name={ this.state.name } updateCardName={ this.updateCardName } />
         </div>
       )
     }

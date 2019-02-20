@@ -1,10 +1,13 @@
 class BoardsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_board, only: [:show, :edit, :update, :destroy]
 
   # GET /boards
   # GET /boards.json
   def index
-    @boards = Board.all
+    # @boards = Board.all
+    @user = current_user
+    @boards = @user.boards.all
     @columns = Column.all
   end
 
@@ -29,6 +32,7 @@ class BoardsController < ApplicationController
   # POST /boards.json
   def create
     @board = Board.new(board_params)
+    @board.user_id = current_user.id
 
     respond_to do |format|
       if @board.save

@@ -1,5 +1,4 @@
 class CardInColumnsController < ApplicationController
-  skip_before_action :verify_authenticity_token
   before_action :set_card_in_column, only: [:show, :edit, :update, :destroy]
 
   # GET /card_in_columns

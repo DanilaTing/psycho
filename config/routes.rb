@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  devise_for :users
+    as :user do
+    get '/users/sign_out' => 'devise/sessions#destroy'
+  end
   namespace :react do
     get "tasks", to: "tasks#index"
     get "projects", to: "projects#index"

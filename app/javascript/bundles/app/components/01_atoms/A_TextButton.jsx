@@ -7,10 +7,10 @@ export default class A_TextButton extends React.Component {
   }
 
   render() {
-    const { text, link, action } = this.props
+    const { text, link } = this.props
 
     return (
-      <div className="A_TextButton" onClick={ action }>
+      <div className="A_TextButton">
         <a href={ link }>{ text }</a>
       </div>
     );
