@@ -15,13 +15,15 @@ export default class O_Column extends React.Component {
     cardInColumns.map((cardInColumn, i) => {
       cards.map((card, i) => {
         if (cardInColumn.card_id == card.id && cardInColumn.column_id == column.id) {
-          columnCards.push (
-            <O_Card
-              card={ card }
-              key={ i }
-              open={ false }
-            />
-          )
+          if (card.type == 'Task' || card.type == 'Project') {
+            columnCards.push (
+              <O_Card
+                card={ card }
+                key={ i }
+                open={ false }
+              />
+            )
+          }
         }
       })
     })
