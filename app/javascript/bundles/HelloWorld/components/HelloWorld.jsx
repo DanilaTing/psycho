@@ -1,3 +1,7 @@
+// app/javascript/packs/hello-world-bundle.js
+import Projects from '../../app/components/startup/Projects';
+import ReactOnRails from 'react-on-rails';
+
 import PropTypes from 'prop-types';
 import React from 'react';
 

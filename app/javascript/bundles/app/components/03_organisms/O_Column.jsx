@@ -9,21 +9,20 @@ export default class O_Column extends React.Component {
   }
 
   renderCards() {
-    const { column, cards, cardInColumns } = this.props
+    const { column, cards, cardInColumns, project } = this.props
     let columnCards = []
 
     cardInColumns.map((cardInColumn, i) => {
       cards.map((card, i) => {
         if (cardInColumn.card_id == card.id && cardInColumn.column_id == column.id) {
-          if (card.type == 'Task' || card.type == 'Project') {
-            columnCards.push (
-              <O_Card
-                card={ card }
-                key={ i }
-                open={ false }
-              />
-            )
-          }
+          columnCards.push (
+            <O_Card
+              project={ project }
+              card={ card }
+              key={ i }
+              open={ false }
+            />
+          )
         }
       })
     })
@@ -32,7 +31,8 @@ export default class O_Column extends React.Component {
   }
 
   render() {
-    const { name, id } = this.props.column
+    const { column } = this.props
+    const { name, id } = column
 
     if (name == "Done") {
       return (
@@ -61,7 +61,6 @@ export default class O_Column extends React.Component {
           </div>
           <div className="addTaskInColumn" onClick={ ()=>this.props.renderNewTask(id) }>Add a task...</div>
         </div>
-
       );
     }
   }
