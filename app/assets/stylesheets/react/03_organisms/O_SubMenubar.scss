@@ -1,0 +1,28 @@
+.O_SubMenubar {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid lightgrey;
+  padding: 0 20px;
+
+  .ProjectName {
+    font-weight: bold;
+  }
+
+  .boardsInMenu {
+    margin-left: 40px;
+
+    &>* {
+      margin-right: 10px;
+    }
+
+    a {
+      color: grey;
+
+      &.active {
+        color: black;
+      }
+    }
+  }
+}
