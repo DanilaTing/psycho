@@ -13,8 +13,6 @@
   background-color: #F4F4F4;
   min-width: 250px;
   min-height: 100px;
-  max-height: 87.5vh;
-  overflow: hidden;
 
   &:not(:first-of-type) {
     margin-left: 10px;
@@ -26,16 +24,6 @@
     line-height: 24px;
     letter-spacing: 0.4px;
     padding: 10px;
-  }
-
-  .cardsWrapper {
-    max-height: 100%;
-    overflow: scroll;
-    margin-bottom: 60px;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
   }
 }
 
@@ -70,6 +58,7 @@
 }
 
 .addTaskInColumn {
+
   position: absolute;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -82,9 +71,12 @@
   text-align: center;
   cursor: pointer;
 
-  &:hover {
+}
+
+
+.addTaskInColumn:hover {
     background-color: #cdd2d4;
     color: #4d4d4d;
     text-decoration: underline;
-  }
+
 }

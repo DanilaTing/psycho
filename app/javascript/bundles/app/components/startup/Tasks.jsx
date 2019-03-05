@@ -1,11 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import $ from 'jquery';
-import Turbolinks from 'turbolinks';
 import O_Menubar from '../03_organisms/O_Menubar';
 import O_Board from '../03_organisms/O_Board';
 import O_Column from '../03_organisms/O_Column';
-import O_NewTask from '../03_organisms/O_NewTask';
 
 export default class Tasks extends React.Component {
   static propTypes = {
@@ -16,6 +13,7 @@ export default class Tasks extends React.Component {
    */
   constructor(props) {
     super(props);
+<<<<<<< HEAD
 
     this.renderNewTask = this.renderNewTask.bind(this)
     this.closeNewTask = this.closeNewTask.bind(this)
@@ -70,6 +68,29 @@ export default class Tasks extends React.Component {
         renderNewTask= { this.renderNewTask }
       />
     )
+=======
+  }
+
+  renderGeneralBoard() {
+    const { columns, cards, cardInColumns } = this.props
+    let boardColumns = []
+
+    columns.sort((a,b) => a.position - b.position);
+    columns.map((column, i) => {
+      if (column.name != "Done" && column.name != "Inbox") {
+        boardColumns.push (
+          <O_Column
+            column={ column }
+            cards={ cards }
+            key={ i }
+            cardInColumns={ cardInColumns }
+          />
+        )
+      }
+    })
+
+    return boardColumns
+>>>>>>> psycho/addingUsers
   }
 
   rednerInboxColumn() {
@@ -113,13 +134,24 @@ export default class Tasks extends React.Component {
   }
 
   render() {
-    const { board, cardInColumns } = this.props
+    const { board } = this.props
 
     return (
       <section>
+<<<<<<< HEAD
         { this.state.newTaskVisible ? (<O_NewTask closeNewTask={ this.closeNewTask } cardInColumns={ cardInColumns } columnId={ this.state.columnFromWhereCreated }/>) : ''}
         <O_Menubar activeTab="Tasks" renderNewTask={ this.renderNewTask }/>
         { this.renderCurrentBoard() }
+=======
+        <O_Menubar activeTab="Tasks"/>
+        <div className="O_Board">
+          { this.rednerDoneColumn() }
+          <div className="columns">
+            { this.renderGeneralBoard() }
+          </div>
+          { this.rednerInboxColumn() }
+        </div>
+>>>>>>> psycho/addingUsers
       </section>
     );
   }

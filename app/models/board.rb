@@ -2,6 +2,7 @@ class Board < ApplicationRecord
   after_create :check_type_and_create_columns
 
   belongs_to :project, optional: true
+  belongs_to :user
   has_many :columns
   has_many :board_in_projects
   has_many :projects, through: :board_in_projects

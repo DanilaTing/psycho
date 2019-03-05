@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%= react_component("Tasks",
   props: {
     generalBoard: @board,
@@ -8,3 +9,20 @@
   },
   prerender: false)
 %>
+=======
+<% if user_signed_in? %>
+  <%= react_component("Tasks",
+    props: {
+      board: @board,
+      columns: @columns,
+      done: @done,
+      inbox: @inbox,
+      cards: @tasks,
+      cardInColumns: @card_in_columns
+    },
+    prerender: false)
+  %>
+<% else %>
+  <h1>Hello stranger!</h1>
+<% end %>
+>>>>>>> psycho/addingUsers
