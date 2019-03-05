@@ -1,14 +1,11 @@
-<% @projects.each do | project | %>
-  <%= project.name %>
-  <%= project.type %>
-<% end %>
-
 <%= react_component("Projects",
   props: {
     board: @board,
     columns: @columns,
     cards: @projects,
-    cardInColumns: @card_in_columns
+    cardInColumns: @card_in_columns,
+    inbox_column: @inbox_column,
+    done_column: @done_column
   },
   prerender: false)
 %>

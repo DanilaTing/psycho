@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import $ from 'jquery';
-import Turbolinks from 'turbolinks';
 import O_Menubar from '../03_organisms/O_Menubar';
+import O_SubMenubar from '../03_organisms/O_SubMenubar';
 import O_Board from '../03_organisms/O_Board';
 import O_Column from '../03_organisms/O_Column';
 import O_NewTask from '../03_organisms/O_NewTask';
 
-export default class Tasks extends React.Component {
+export default class Project extends React.Component {
   static propTypes = {
   };
 
@@ -22,7 +21,7 @@ export default class Tasks extends React.Component {
 
     this.state = {
       newTaskVisible: false,
-      columnFromWhereCreated: '',
+      columnFromWhereCreated: 6,
       currentBoard: 'General'
     }
   }
@@ -39,7 +38,7 @@ export default class Tasks extends React.Component {
   closeNewTask() {
     this.setState({
       newTaskVisible: false,
-      columnFromWhereCreated: ''
+      columnFromWhereCreated: 6
     })
   }
 
@@ -72,54 +71,39 @@ export default class Tasks extends React.Component {
     )
   }
 
-  rednerInboxColumn() {
-    const { columns, cards, cardInColumns } = this.props
-    let inboxColumn = []
-
-    columns.map((column, i) => {
-      if (column.name == "Inbox") {
-        inboxColumn.push (
-          <O_Column
-            column={ column }
-            cards={ cards }
-            key={ i }
-            cardInColumns={ cardInColumns }
-          />
-        )
-      }
-    })
-
-    return inboxColumn
-  }
-
-  rednerDoneColumn() {
-    const { columns, cards, cardInColumns } = this.props
-    let doneColumn = []
-
-    columns.map((column, i) => {
-      if (column.name == "Done") {
-        doneColumn.push (
-          <O_Column
-            column={ column }
-            cards={ cards }
-            key={ i }
-            cardInColumns={ cardInColumns }
-          />
-        )
-      }
-    })
-
-    return doneColumn
-  }
-
   render() {
-    const { board, cardInColumns } = this.props
+    const {
+      project,
+      boards,
+      generalBoard,
+      projectsBoards,
+      inboxColumn,
+      doneColumn,
+      cards,
+      cardInColumns,
+      tasks
+    } = this.props
 
     return (
       <section>
-        { this.state.newTaskVisible ? (<O_NewTask closeNewTask={ this.closeNewTask } cardInColumns={ cardInColumns } columnId={ this.state.columnFromWhereCreated }/>) : ''}
-        <O_Menubar activeTab="Tasks" renderNewTask={ this.renderNewTask }/>
+        { this.state.newTaskVisible ? (
+          <O_NewTask
+            project=      { project }
+            closeNewTask= { this.closeNewTask }
+            cardInColumns={ cardInColumns }
+            columnId=     { this.state.columnFromWhereCreated }
+          />
+        ) : ''}
+
+        <O_Menubar activeTab="none" renderNewTask={ this.renderNewTask }/>
+        <O_SubMenubar
+          project={ project }
+          boards={ boards }
+          currentBoard={ this.state.currentBoard }
+        />
+
         { this.renderCurrentBoard() }
+
       </section>
     );
   }

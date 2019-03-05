@@ -15,7 +15,8 @@ class Card < ApplicationRecord
   end
 
   def put_in_inbox
-    card_in_column = self.card_in_columns.create(card_id: self.id, column_id: 6)
+    @inbox = Column.find_by(name: 'Inbox')
+    card_in_column = self.card_in_columns.create(card_id: self.id, column_id: @inbox.id)
     card_in_column.save!
   end
 end

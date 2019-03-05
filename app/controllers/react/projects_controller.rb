@@ -6,27 +6,28 @@ class React::ProjectsController < ApplicationController
   def index
     @board = Board.find_by(general: true)
     @columns = @board.columns
+    @inbox_column = Column.find_by(name: 'Inbox')
+    @done_column = Column.find_by(name: 'Done')
     @cards = Card.all
     @card_in_columns = CardInColumn.all
 
     @columns.each do |column|
-      @tasks = @cards.where("type = 'Task'")
-      @projects = @cards.where("type = 'Project'")
+      @tasks = @cards.where(type: 'Task').as_json(only: [:id, :name, :description, :project_id, :type], include: :card_in_columns)
+      @projects = @cards.where(type: 'Project').as_json(only: [:id, :name, :description, :project_id, :type], include: :card_in_columns)
     end
   end
 
   # GET /projects/1
   # GET /projects/1.json
   def show
-    @board = Board.find_by(general: true)
-    @columns = @board.columns
-    @cards = Card.all
+    @project.as_json(include: [:tasks, :boards])
+    @boards = Board.all
+    @general_board = Board.find_by(general: true).as_json(include: :columns)
+    @projects_boards = @project.boards.as_json(include: :columns)
+    @inbox_column = Column.find_by(name: 'Inbox')
+    @done_column = Column.find_by(name: 'Done')
     @card_in_columns = CardInColumn.all
-
-    @columns.each do |column|
-      @tasks = @cards.where("type = 'Task'")
-      @projects = @cards.where("type = 'Project'")
-    end
+    @tasks = Card.where(type: 'Task').as_json(only: [:id, :name, :description, :project_id, :type], include: :card_in_columns)
   end
 
   # GET /projects/new

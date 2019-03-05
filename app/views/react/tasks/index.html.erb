@@ -1,10 +1,9 @@
 <%= react_component("Tasks",
   props: {
-    board: @board,
-    columns: @columns,
-    done: @done,
-    inbox: @inbox,
-    cards: @tasks,
+    generalBoard: @board,
+    doneColumn: @done,
+    inboxColumn: @inbox,
+    tasks: @tasks,
     cardInColumns: @card_in_columns
   },
   prerender: false)

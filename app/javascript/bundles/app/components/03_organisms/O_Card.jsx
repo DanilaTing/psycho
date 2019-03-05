@@ -43,13 +43,28 @@ export default class O_Card extends React.Component {
 
     if (open == false) {
       return (
-        <O_CardClosed triggerCard={ this.triggerCard } name={ this.state.name }/>
+        <O_CardClosed
+          triggerCard={ this.triggerCard }
+          name={ this.state.name }
+          card={ card }
+        />
       )
     } else {
       return (
         <div>
-          <O_CardClosed triggerCard={ this.triggerCard } name={ this.state.name }/>
-          <O_CardOpen triggerCard={ this.triggerCard } card={ card } name={ this.state.name } description={ this.state.description } updateCardName={ this.updateCardName } updateCardDescprition={ this.updateCardDescprition } />
+          <O_CardClosed
+            triggerCard={ this.triggerCard }
+            name={ this.state.name }
+            card={ card }
+          />
+          <O_CardOpen
+            triggerCard={ this.triggerCard }
+            card={ card }
+            name={ this.state.name }
+            description={ this.state.description }
+            updateCardName={ this.updateCardName }
+            updateCardDescprition={ this.updateCardDescprition }
+          />
         </div>
       )
     }

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     get "tasks", to: "tasks#index"
     get "projects", to: "projects#index"
     get "projects/new", to: "projects#new"
+    get "projects/:id", to: "projects#show"
   end
 
 
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
   resources :columns
   resources :boards
   resources :tasks
+  resources :projects
   resources :board_in_projects
   resources :card_in_columns
   resources :react

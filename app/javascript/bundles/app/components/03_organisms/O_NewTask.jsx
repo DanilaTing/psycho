@@ -34,22 +34,31 @@ export default class O_NewTask extends React.Component {
   }
 
   saveCard(e) {
-    const newCardName = this.state.name
-    const newCardDescription = this.state.description
-    const card_link = '../cards'
+    const { project } = this.props
+    const { name, description} = this.state
+    const card_link = '../../tasks'
     let self = this
+
+    const data = {
+      task: {
+        name: name,
+        description: description
+      }
+    }
+
+    if (project) {
+      data.task = {
+        name: name,
+        description: description,
+        project_id: project.id
+      }
+    }
 
     $.ajax({
       dataType: 'JSON',
       url: card_link,
       type: "POST",
-      data: { card:
-        {
-          name: newCardName,
-          description: newCardDescription,
-          type: 'Task',
-        },
-      },
+      data: data,
       success: response => {
         console.log("it worked!", response);
       }
@@ -83,7 +92,7 @@ export default class O_NewTask extends React.Component {
 
     $.ajax({
       dataType: 'JSON',
-      url: '../card_in_columns/' + newId,
+      url: '../../card_in_columns/' + newId,
       type: "PATCH",
       data: { card_in_column:
         {

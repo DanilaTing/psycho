@@ -48,7 +48,7 @@ export default class O_CardOpen extends React.Component {
     const { card, triggerCard } = this.props
     const newCardName = e
 
-    const card_link = '../cards/' + card.id
+    const card_link = '../../cards/' + card.id
 
     let self = this
 
@@ -77,7 +77,7 @@ export default class O_CardOpen extends React.Component {
     const { card, triggerCard } = this.props
     const newCardDescription = e
 
-    const card_link = '../cards/' + card.id
+    const card_link = '../../cards/' + card.id
 
     let self = this
 
@@ -105,7 +105,7 @@ export default class O_CardOpen extends React.Component {
   deleteCard() {
     const { card } = this.props
 
-    const card_link = '../cards/' + card.id
+    const card_link = '../../cards/' + card.id
 
     let self = this
 
