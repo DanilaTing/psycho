@@ -17,7 +17,7 @@ export default class Tasks extends React.Component {
     this.pushNewTaskToTasks = this.pushNewTaskToTasks.bind(this)
 
     this.state = {
-      tasks: '',
+      tasks: [],
       inboxId: '',
       newTaskVisible: false,
       currentBoard: 'General',

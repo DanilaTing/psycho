@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { DragDropContext } from 'react-beautiful-dnd';
+import { Droppable } from 'react-beautiful-dnd';
 import O_Column from '../03_organisms/O_Column';
 
 export default class O_Board extends React.Component {
@@ -13,26 +15,40 @@ export default class O_Board extends React.Component {
 
     board.columns.map((column, i) => {
       columns.push(
-        <O_Column
-          key           = { i }
-          boards        = { boards }
-          project       = { project }
-          column        = { column }
-          cards         = { cards }
-          projectTasks  = { projectTasks }
-          renderNewTask = { renderNewTask }
-        />
+        <Droppable droppableId={ column.id }>
+          {(provided) => (
+            <O_Column
+              innerRef={ provided.innerRef }
+              provided={provided}
+              key           = { i }
+              boards        = { boards }
+              project       = { project }
+              column        = { column }
+              cards         = { cards }
+              projectTasks  = { projectTasks }
+              renderNewTask = { renderNewTask }
+            >
+              { provided.placeholder }
+            </O_Column>
+          )}
+        </Droppable>
       )
     })
 
     return columns
   }
 
+  onDragEnd = result => {
+
+  }
+
   render() {
     return (
-      <div className="O_Board">
-        { this.renderCurrentBoardColumns() }
-      </div>
+      <DragDropContext onDragEnd={ this.onDragEnd }>
+        <div className="O_Board">
+          { this.renderCurrentBoardColumns() }
+        </div>
+      </DragDropContext>
     )
   }
 }

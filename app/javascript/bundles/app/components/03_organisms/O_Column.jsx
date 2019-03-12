@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Draggable } from 'react-beautiful-dnd';
 import O_Card from '../03_organisms/O_Card';
 import Turbolinks from 'turbolinks';
 
@@ -54,12 +55,18 @@ export default class O_Column extends React.Component {
 
     sorted.map((card, i) => {
       arrayToRender.push(
-        <O_Card
-          boards = { boards }
-          key    = { i }
-          card   = { card }
-          open   = { false }
-        />
+        <Draggable draggableId={ card.id } index={ i }>
+          {(provided) => (
+            <O_Card
+              innerRef = { provided.innerRef }
+              provided = { provided }
+              boards = { boards }
+              key    = { i }
+              card   = { card }
+              open   = { false }
+            />
+          )}
+        </Draggable>
       )
     })
 
@@ -84,14 +91,20 @@ export default class O_Column extends React.Component {
 
     let arrayToRender = []
 
-    cardsToRender.map((cardToRender, i) => {
+    cardsToRender.map((card, i) => {
       arrayToRender.push(
-        <O_Card
-          boards = { boards }
-          key    = { i }
-          card   = { cardToRender }
-          open   = { false }
-        />
+        <Draggable draggableId={ card.id } index={ i }>
+          {(provided) => (
+            <O_Card
+              innerRef = { provided.innerRef }
+              provided = { provided }
+              boards   = { boards }
+              key      = { i }
+              card     = { card }
+              open     = { false }
+            />
+          )}
+        </Draggable>
       )
     })
 
@@ -99,26 +112,26 @@ export default class O_Column extends React.Component {
   }
 
   render() {
-    const { renderNewTask } = this.props
+    const { renderNewTask, provided, innerRef } = this.props
     const { name, id } = this.props.column
 
     if (name == "Done") {
       return (
-        <div className="column general done">
+        <div className="column general done" ref={innerRef} { ...provided.droppableProps }>
           <p className="columnHeading">{ name }</p>
           { this.renderInboxAndDoneCards() }
         </div>
       )
     } else if (name == "Inbox") {
       return (
-        <div className="column general inbox">
+        <div className="column general inbox" ref={innerRef} { ...provided.droppableProps }>
           <p className="columnHeading">{ name }</p>
           { this.renderInboxAndDoneCards() }
         </div>
       )
     } else {
       return (
-        <div className="column">
+        <div className="column" ref={innerRef} { ...provided.droppableProps }>
           <p className="columnHeading">{ name }</p>
           { this.renderCards() }
           <div className="addTaskInColumn" onClick={ () => renderNewTask(id) }>Add a task...</div>
