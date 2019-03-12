@@ -1,6 +1,6 @@
 class CardsController < ApplicationController
-  before_action :set_card, only: [:show, :edit, :update, :destroy, :turn_into_project]
   skip_before_action :verify_authenticity_token
+  before_action :set_card, only: [:show, :edit, :update, :destroy, :turn_into_project]
 
   # GET /cards
   # GET /cards.json
@@ -30,12 +30,18 @@ class CardsController < ApplicationController
     # self.update(card_params)
     @card.type = "Project"
 
+    @general_board = Board.find_by(name: 'General')
+    @priority_board = Board.find_by(name: 'Priorities')
+
     respond_to do |format|
       if @card.save
         set_card
         format.html { redirect_to @card, notice: 'Card was turned into the project.' }
         # format.html { redirect_to card_path(@card), notice: 'Card was turned into the project.' }
         format.json { render :show, status: :created, location: @card }
+
+        @board_in_project = @card.board_in_projects.create(board_id: @general_board.id, project_id: @card.id)
+        @board_in_project = @card.board_in_projects.create(board_id: @priority_board.id, project_id: @card.id)
       else
         format.html { render :new }
         format.json { render json: @card.errors, status: :unprocessable_entity }
@@ -47,11 +53,18 @@ class CardsController < ApplicationController
   # POST /cards.json
   def create
     @card = Card.new(card_params)
+    @user = current_user
 
     respond_to do |format|
       if @card.save
-        format.html { redirect_to @card, notice: 'Card was successfully created.' }
-        format.json { render :show, status: :created, location: @card }
+        # format.html { redirect_to @card, notice: 'Card was successfully created.' }
+        # format.json { render :show, status: :created, location: @card }
+        format.json { render json: @card.as_json(only: [:id, :name, :description, :project_id, :type], include: :card_in_columns), status: :ok }
+        # render json: [@card], status: :ok
+
+        @column_id = params[:column_id]
+        @card_in_column = @card.card_in_columns.create(card_id: @card.id, column_id: @column_id, user_id: @user.id)
+        @card_in_column.save
       else
         format.html { render :new }
         format.json { render json: @card.errors, status: :unprocessable_entity }
@@ -107,6 +120,6 @@ class CardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def card_params
-      params.require(:card).permit(:type, :name, :description, card_in_columns_attributes: [:id, :column_id, :card_id])
+      params.require(:card).permit(:type, :name, :description, :user_id, :project_id, card_in_columns_attributes: [:id, :column_id, :card_id])
     end
 end

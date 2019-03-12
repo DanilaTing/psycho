@@ -1,0 +1,23 @@
+.O_ProjectBar {
+  width: 100vw;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #D8D8D8;
+
+  position: relative;
+  padding-left: 20px;
+
+  input {
+    border: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .A_Button {
+    position: sticky;
+  }
+}

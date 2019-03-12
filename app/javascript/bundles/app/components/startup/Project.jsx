@@ -18,92 +18,123 @@ export default class Project extends React.Component {
 
     this.renderNewTask = this.renderNewTask.bind(this)
     this.closeNewTask = this.closeNewTask.bind(this)
+    this.pushNewTaskToTasks = this.pushNewTaskToTasks.bind(this)
 
     this.state = {
       newTaskVisible: false,
-      columnFromWhereCreated: 6,
-      currentBoard: 'General'
+      columnFromWhereCreated: '',
+      currentBoard: 'General',
+      tasks: [],
+      projectTasks: this.props.project.tasks
     }
   }
 
-  renderNewTask(id) {
-    console.log('new task rendered');
+  componentWillMount() {
+    const { boards } = this.props
+    let tasks = []
+    var inboxId
+
+    // Находим Tasks из всех Cards
+    boards.map(board => {
+      board.columns.map(column => {
+        column.cards.map(card => {
+          if (card.type == 'Task') {
+            tasks.push(card)
+          }
+        })
+      })
+    })
+
+    // находим inbox
+    boards.map(board => {
+      if (board.name == 'General') {
+        board.columns.map(column => {
+          if (column.name == 'Inbox') {
+            inboxId = column.id
+          }
+        })
+      }
+    })
 
     this.setState({
-      newTaskVisible: true,
-      columnFromWhereCreated: id
+      tasks: tasks,
+      columnFromWhereCreated: inboxId,
+      inboxId: inboxId
+    })
+  }
+
+  renderNewTask(id) {
+    this.setState({
+      columnFromWhereCreated: id,
+      newTaskVisible: true
     })
   }
 
   closeNewTask() {
     this.setState({
       newTaskVisible: false,
-      columnFromWhereCreated: 6
+      columnFromWhereCreated: this.state.inboxId
     })
   }
 
+  pushNewTaskToTasks(task) {
+    const tasks = this.state.tasks
+    tasks.push(task)
+    console.log(tasks);
+
+    this.setState({
+      tasks: tasks
+    })
+  }
+
+
   renderCurrentBoard() {
-    const { currentBoard } = this.state
-    const {
-      project,
-      generalBoard,
-      projectsBoards,
-      inboxColumn,
-      doneColumn,
-      cards,
-      cardInColumns,
-      tasks
-    } = this.props
+    const { currentBoard, tasks, projectTasks } = this.state
+    const { boards, project } = this.props
+    let boardToRender
+
+    boards.map(board => {
+      if (board.name == currentBoard) {
+        boardToRender = board
+      }
+    })
 
     return(
       <O_Board
-        project=       { project }
-        currentBoard=  { currentBoard }
-        generalBoard=  { generalBoard }
-        projectsBoards={ projectsBoards }
-        inboxColumn=   { inboxColumn }
-        doneColumn=    { doneColumn }
-        cards=         { cards }
-        cardInColumns= { cardInColumns }
-        tasks=         { tasks }
-        renderNewTask= { this.renderNewTask }
+        board              = { boardToRender }
+        project            = { project }
+        cards              = { tasks }
+        projectTasks       = { projectTasks }
+        renderNewTask      = { this.renderNewTask }
       />
     )
   }
 
   render() {
-    const {
-      project,
-      boards,
-      generalBoard,
-      projectsBoards,
-      inboxColumn,
-      doneColumn,
-      cards,
-      cardInColumns,
-      tasks
-    } = this.props
+    const { boards, user, project } = this.props
+    const { columnFromWhereCreated, inboxId } = this.state
 
     return (
       <section>
         { this.state.newTaskVisible ? (
           <O_NewTask
-            project=      { project }
-            closeNewTask= { this.closeNewTask }
-            cardInColumns={ cardInColumns }
-            columnId=     { this.state.columnFromWhereCreated }
+            closeNewTask       = { this.closeNewTask }
+            project            = { project }
+            boards             = { boards }
+            user               = { user }
+            columnId           = { columnFromWhereCreated }
+            pushNewTaskToTasks = { this.pushNewTaskToTasks }
           />
-        ) : ''}
-
-        <O_Menubar activeTab="none" renderNewTask={ this.renderNewTask }/>
+        ) : '' }
+        <O_Menubar
+          renderNewTask={ this.renderNewTask }
+          inboxId=      { inboxId }
+        />
         <O_SubMenubar
-          project={ project }
           boards={ boards }
           currentBoard={ this.state.currentBoard }
         />
-
         { this.renderCurrentBoard() }
-
       </section>
     );
   }

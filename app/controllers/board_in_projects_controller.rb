@@ -1,4 +1,5 @@
 class BoardInProjectsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_board_in_project, only: [:show, :edit, :update, :destroy]
 
   # GET /board_in_projects

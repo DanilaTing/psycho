@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   # GET /projects
@@ -72,6 +73,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :description, :type, card_in_columns_attributes: [:id, :column_id, :card_id])
+      params.require(:project).permit(:name, :description, :type, :user_id, card_in_columns_attributes: [:id, :column_id, :card_id])
     end
 end

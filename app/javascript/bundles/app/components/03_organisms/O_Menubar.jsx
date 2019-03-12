@@ -10,24 +10,20 @@ export default class O_Menubar extends React.Component {
   }
 
   render() {
-<<<<<<< HEAD
-    const { activeTab, renderNewTask, closeNewTask } = this.props
+    const { activeTab, renderNewTask, closeNewTask, inboxId } = this.props
     const id = 7
-=======
-    const { activeTab } = this.props
->>>>>>> psycho/addingUsers
 
     let tabs = [
       {
         text: 'Tasks',
-        link: '../react/tasks',
+        link: '../../react/tasks',
         activeTab: activeTab
       }, {
         text: 'Projects',
-        link: '../react/projects',
+        link: '../../react/projects',
         activeTab: activeTab
       }
-    ] 
+    ]
     return (
       <section className="O_Menubar">
         <div className="leftside">
@@ -37,13 +33,15 @@ export default class O_Menubar extends React.Component {
 
         <div className="rightside">
           <div className="buttons">
-<<<<<<< HEAD
-            <A_TextButton text="New Task" action={ () => renderNewTask(id) }/>
-            <A_TextButton text="New Project" link="../../../react/projects/new"/>
-=======
-            <A_TextButton text="New Task"/>
-            <A_TextButton text="New Project" link="projects/new"/>
->>>>>>> psycho/addingUsers
+            <A_TextButton
+              text="New Task"
+              action={ renderNewTask }
+              inboxId={ inboxId }
+            />
+            <A_TextButton
+              text="New Project"
+              link="../../../react/projects/new"
+            />
           </div>
           <A_Avatar/>
         </div>

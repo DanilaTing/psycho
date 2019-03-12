@@ -13,8 +13,17 @@ export default class O_Card extends React.Component {
 
     this.state = {
       open: this.props.open,
-      name: this.props.card.name
+      name: this.props.card.name,
+      description: this.props.card.description
     }
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState({
+      open: this.props.open,
+      name: this.props.card.name,
+      description: this.props.card.description
+    })
   }
 
   triggerCard() {
@@ -30,38 +39,34 @@ export default class O_Card extends React.Component {
   }
 
   render() {
-    const { open, name } = this.state
-    const { card } = this.props
+    const { boards, card } = this.props
+    const { open, name, description } = this.state
 
     if (open == false) {
       return (
         <O_CardClosed
-          triggerCard={ this.triggerCard }
-          name={ this.state.name }
-          card={ card }
+          name        = { name }
+          card        = { card }
+          triggerCard = { this.triggerCard }
         />
       )
     } else {
       return (
         <div>
-<<<<<<< HEAD
           <O_CardClosed
-            triggerCard={ this.triggerCard }
-            name={ this.state.name }
-            card={ card }
+            triggerCard = { this.triggerCard }
+            name        = { this.state.name }
+            card        = { card }
           />
           <O_CardOpen
-            triggerCard={ this.triggerCard }
-            card={ card }
-            name={ this.state.name }
-            description={ this.state.description }
-            updateCardName={ this.updateCardName }
-            updateCardDescprition={ this.updateCardDescprition }
+            boards                = { boards }
+            card                  = { card }
+            name                  = { name }
+            description           = { description }
+            updateCardName        = { this.updateCardName }
+            updateCardDescprition = { this.updateCardDescprition }
+            triggerCard           = { this.triggerCard }
           />
-=======
-          <O_CardClosed triggerCard={ this.triggerCard } name={ this.state.name }/>
-          <O_CardOpen triggerCard={ this.triggerCard } card={ card } name={ this.state.name } updateCardName={ this.updateCardName } />
->>>>>>> psycho/addingUsers
         </div>
       )
     }

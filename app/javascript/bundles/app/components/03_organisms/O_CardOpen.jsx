@@ -12,9 +12,13 @@ export default class O_CardOpen extends React.Component {
       description: this.props.description
     }
 
-    this.saveCard = this.saveCard.bind(this)
+    this.saveCardName = this.saveCardName.bind(this)
+    this.saveCardDescription = this.saveCardDescription.bind(this)
+    this.deleteCard = this.deleteCard.bind(this)
     this.changeCardName = this.changeCardName.bind(this)
-    // this.changeCardDescription = this.changeCardDescription.bind(this)
+    this.changeCardDescription = this.changeCardDescription.bind(this)
+    this.turnIntoProject = this.turnIntoProject.bind(this)
+    this.createBoardInProject = this.createBoardInProject.bind(this)
   }
 
   changeCardName(e) {
@@ -22,14 +26,26 @@ export default class O_CardOpen extends React.Component {
       name: e.target.value
     })
 
-    this.saveCard(e.target.value)
+    this.saveCardName(e.target.value)
+  }
+
+  changeCardDescription(e) {
+    this.setState({
+      description: e.target.value
+    })
+
+    this.saveCardDescription(e.target.value)
   }
 
   updateCardName(name) {
     this.props.updateCardName(name)
   }
 
-  saveCard(e) {
+  updateCardDescprition(name) {
+    this.props.updateCardDescprition(name)
+  }
+
+  saveCardName(e) {
     const { card, triggerCard } = this.props
     const newCardName = e
 
@@ -58,7 +74,6 @@ export default class O_CardOpen extends React.Component {
     });
   }
 
-<<<<<<< HEAD
   saveCardDescription(e) {
     const { card, triggerCard } = this.props
     const newCardDescription = e
@@ -116,11 +131,23 @@ export default class O_CardOpen extends React.Component {
   }
 
   turnIntoProject() {
-    const { card } = this.props
-
-    const card_link = '../cards/' + card.id
-
+    const { boards, card } = this.props
+    const card_link = '../../cards/' + card.id
     let self = this
+    var generalBoard = ''
+    var prioritiesBoard = ''
+
+    boards.map(board => {
+      switch (board.name) {
+        case 'General':
+          generalBoard = board
+          break;
+        case 'Priorities':
+          prioritiesBoard = board
+          break;
+        default:
+      }
+    })
 
     $.ajax({
       dataType: 'JSON',
@@ -128,12 +155,14 @@ export default class O_CardOpen extends React.Component {
       type: "PATCH",
       data: { card: { type: 'Project'  } },
       success: response => {
-        console.log("it worked!", response);
+        console.log("task turned into project", response);
       }
     })
     .done(function() {
       console.log( "success" );
-      window.location = "../../react/projects";
+      self.createBoardInProject(generalBoard)
+      self.createBoardInProject(prioritiesBoard)
+      window.location = "../../react/projects/" + card.id;
     })
     .fail(function() {
       console.log( "error" );
@@ -143,18 +172,51 @@ export default class O_CardOpen extends React.Component {
     });
   }
 
-=======
->>>>>>> psycho/addingUsers
+  createBoardInProject(board) {
+    const { card } = this.props
+
+    const link = '../../board_in_projects'
+
+    let self = this
+
+    $.ajax({
+      dataType: 'JSON',
+      url: link,
+      type: "POST",
+      data: {
+        board_in_project: {
+          project_id: card.id,
+          board_id: board.id
+        }
+      },
+      success: response => {
+        console.log("created board_in_project", response);
+      }
+    })
+    .done(function() {
+      console.log( "success" );
+    })
+    .fail(function() {
+      console.log( "error" );
+    })
+    .always(function() {
+      console.log( "complete" );
+    });
+  }
+
   render() {
     const { card, triggerCard } = this.props
 
     return (
       <div className="openCardWraper">
         <div className="card open">
-          <input value={ this.state.name } onChange={ this.changeCardName }></input>
-          <input value={ this.state.description } ></input>
-          <div><p>{this.state.description}</p></div>
+          <input className="M_TextInput name" placeholder='New Task' value={ this.state.name } onChange={ this.changeCardName }></input>
+          <textarea className="M_TextInput description" placeholder='Description' value={ this.state.description } onChange={ this.changeCardDescription }></textarea>
           <div className="close" onClick={ triggerCard }></div>
+          <div className="M_CardActions">
+            <div className="A_TextButton delete" onClick={ this.deleteCard }>Delete</div>
+            <div className="A_TextButton turnIntoProject" onClick={ this.turnIntoProject }>Turn Into Project</div>
+          </div>
         </div>
       </div>
     )
