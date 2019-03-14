@@ -5,6 +5,9 @@
   align-items: center;
   border-bottom: 1px solid lightgrey;
   padding: 0 20px;
+  position: fixed;
+  top: 60px;
+  left: 0;
 
   .ProjectName {
     font-weight: bold;

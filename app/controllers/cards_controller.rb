@@ -59,11 +59,27 @@ class CardsController < ApplicationController
       if @card.save
         # format.html { redirect_to @card, notice: 'Card was successfully created.' }
         # format.json { render :show, status: :created, location: @card }
-        format.json { render json: @card.as_json(only: [:id, :name, :description, :project_id, :type], include: :card_in_columns), status: :ok }
-        # render json: [@card], status: :ok
+        format.json { render json:
+        @card.as_json(
+          only: [:id, :name, :description, :project_id, :type],
+          include: { card_in_columns: {
+          include: { card: {
+          only: [:id, :name, :description, :project_id, :type]
+        }}}}),
+        status: :ok }
 
         @column_id = params[:column_id]
-        @card_in_column = @card.card_in_columns.create(card_id: @card.id, column_id: @column_id, user_id: @user.id)
+        @column = Column.find_by(id: @column_id)
+        @max = @column.card_in_columns.map{|c| [c.position]}.max
+        logger.debug "Max position: #{@max}"
+
+        if @max == nil
+          @position = 0
+        else
+          @position = @max.max + 1
+        end
+
+        @card_in_column = @card.card_in_columns.create(card_id: @card.id, column_id: @column_id, user_id: @user.id, position: @position)
         @card_in_column.save
       else
         format.html { render :new }

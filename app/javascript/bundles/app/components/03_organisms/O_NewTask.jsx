@@ -34,10 +34,11 @@ export default class O_NewTask extends React.Component {
   }
 
   saveCard(e) {
-    const { project, user, columnId, pushNewTaskToTasks } = this.props
+    const { boards, project, user, columnId, pushNewTaskToTasks } = this.props
     const { name, description} = this.state
-    const card_link = '../../cards'
     let self = this
+
+    const card_link = '../../cards'
 
     const data = {
       card: {
@@ -46,7 +47,8 @@ export default class O_NewTask extends React.Component {
         description: description,
         user_id: user.id
       },
-      column_id: columnId
+      column_id: columnId,
+      // position: position
     }
 
     if (project) {
@@ -72,7 +74,6 @@ export default class O_NewTask extends React.Component {
     .done(function() {
       console.log( "success" );
       self.props.closeNewTask()
-      // window.location.reload()
     })
     .fail(function() {
       console.log( "error" );

@@ -1,11 +1,12 @@
-<%= react_component("Projects",
-  props: {
-    board: @board,
-    columns: @columns,
-    cards: @projects,
-    cardInColumns: @card_in_columns,
-    inbox_column: @inbox_column,
-    done_column: @done_column
-  },
-  prerender: false)
-%>
+<% if user_signed_in? %>
+  <%= react_component("Tasks",
+    props: {
+      user: @user,
+      are_projects: @are_projects,
+      boards: @boards
+    },
+    prerender: false)
+  %>
+<% else %>
+  <%= render 'sign_in_form' %>
+<% end %>

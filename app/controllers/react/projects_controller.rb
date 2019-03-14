@@ -4,16 +4,20 @@ class React::ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @board = Board.find_by(general: true)
-    @columns = @board.columns
-    @inbox_column = Column.find_by(name: 'Inbox')
-    @done_column = Column.find_by(name: 'Done')
-    @cards = Card.all
-    @card_in_columns = CardInColumn.all
+    @user = current_user
+    @are_projects = true
 
-    @columns.each do |column|
-      @tasks = @cards.where(type: 'Task').as_json(only: [:id, :name, :description, :project_id, :type], include: :card_in_columns)
-      @projects = @cards.where(type: 'Project').as_json(only: [:id, :name, :description, :project_id, :type], include: :card_in_columns)
+    if user_signed_in?
+      @boards = @user.boards.as_json(include: { columns: {
+                                                include: { cards: {
+                                                           only: [:id, :name, :description, :project_id, :type],
+                                                           include: { card_in_columns: {
+                                                                      include: { card: {
+                                                                                 only: [:id, :name, :description, :project_id, :type],
+                                                                      } }
+                                                           } }
+                                                         }}
+      } })
     end
   end
 

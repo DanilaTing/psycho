@@ -39,14 +39,13 @@ export default class O_Card extends React.Component {
   }
 
   render() {
-    const { boards, card } = this.props
+    const { boards, card, index } = this.props
     const { open, name, description } = this.state
 
     if (open == false) {
       return (
         <O_CardClosed
-          innerRef    = { this.props.innerRef }
-          provided    = { this.props.provided }
+          index       = { index }
           name        = { name }
           card        = { card }
           triggerCard = { this.triggerCard }
@@ -56,13 +55,12 @@ export default class O_Card extends React.Component {
       return (
         <div>
           <O_CardClosed
-            innerRef    = {this.props.innerRef}
+            index       = { index }
             triggerCard = { this.triggerCard }
             name        = { this.state.name }
             card        = { card }
           />
           <O_CardOpen
-            innerRef              = {this.props.innerRef}
             boards                = { boards }
             card                  = { card }
             name                  = { name }

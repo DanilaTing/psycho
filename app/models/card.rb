@@ -3,7 +3,7 @@ class Card < ApplicationRecord
   after_create :attach_to_user
   # after_create :create_card_in_column
 
-  has_many :card_in_columns
+  has_many :card_in_columns, :dependent => :delete_all
   has_many :columns, through: :card_in_columns
   belongs_to :user
 
