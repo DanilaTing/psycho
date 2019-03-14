@@ -23,6 +23,7 @@ export default class O_ProjectBar extends React.Component {
 
   createProject() {
     let self = this
+    const { user, columnId } = this.props
 
     $.ajax({
       dataType: 'JSON',
@@ -31,8 +32,10 @@ export default class O_ProjectBar extends React.Component {
       data: { card:
         {
           name: self.state.name,
-          type: 'Project'
+          type: 'Project',
+          user_id: user.id
         },
+        column_id: columnId
       },
       success: response => {
         console.log("it worked!", response);

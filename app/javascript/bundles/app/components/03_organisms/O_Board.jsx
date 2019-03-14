@@ -7,84 +7,32 @@ export default class O_Board extends React.Component {
     super(props);
   }
 
-  renderColumns() {
-    const { columns } = this.props
-    const htmlElements = []
+  renderCurrentBoardColumns() {
+    const { boards, board, cards, renderNewTask, projectTasks, project } = this.props
+    let columns = []
 
-    columns.map((column, i) => {
-      htmlElements.push(
-        <O_Column column={ column } key={ 'column_' + i } />
-      )
-    })
-
-    return (
-      <div>
-        { htmlElements }
-      </div>
-    )
-  }
-
-  renderGeneralBoard() {
-    const {
-      project,
-      currentBoard,
-      generalBoard,
-      projectsBoards,
-      inboxColumn,
-      doneColumn,
-      cardInColumns,
-      tasks,
-      renderNewTask
-    } = this.props
-
-    let columnsForBoard = []
-    let tasksForProject = []
-    let cards
-
-    if (project) {
-      tasks.map((task, i)=> {
-        if (task.project_id == project.id) {
-          tasksForProject.push(
-            task
-          )
-        }
-      })
-      cards = tasksForProject
-    } else {
-      cards = tasks
-    }
-
-    generalBoard.columns.map((column, i) => {
-      columnsForBoard.push(
+    board.columns.map((column, i) => {
+      columns.push(
         <O_Column
-          project=      { project }
-          key=          { i }
-          column=       { column }
-          cards=        { cards }
-          cardInColumns={ cardInColumns }
-          renderNewTask={ renderNewTask }
+          key           = { i }
+          boards        = { boards }
+          project       = { project }
+          column        = { column }
+          cards         = { cards }
+          projectTasks  = { projectTasks }
+          renderNewTask = { renderNewTask }
         />
       )
     })
 
-    return columnsForBoard
+    return columns
   }
 
   render() {
-    const { currentBoard } = this.props
-
-    if (currentBoard == 'General') {
-      return (
-        <div className="O_Board">
-          { this.renderGeneralBoard() }
-        </div>
-      )
-    } else {
-      return (
-        <div className="O_Board">
-          { this.renderColumns( ) }
-        </div>
-      )
-    }
+    return (
+      <div className="O_Board">
+        { this.renderCurrentBoardColumns() }
+      </div>
+    )
   }
 }

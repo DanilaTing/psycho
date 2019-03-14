@@ -12,12 +12,10 @@ export default class O_CardClosed extends React.Component {
     const { triggerCard, name, card } = this.props
     const { type, id } = card
     const link = '../react/projects/' + id
-    console.log(link);
-
     if (type == 'Project') {
       return (
         <a href={ link }>
-          <div className="card closed" onClick={ triggerCard } draggable={true}>
+          <div className="card closed" onClick={ triggerCard } draggable={ true }>
             <div className="content">
               <p>{ name }</p>
             </div>

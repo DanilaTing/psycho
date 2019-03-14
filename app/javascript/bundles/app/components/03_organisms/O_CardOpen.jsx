@@ -18,6 +18,7 @@ export default class O_CardOpen extends React.Component {
     this.changeCardName = this.changeCardName.bind(this)
     this.changeCardDescription = this.changeCardDescription.bind(this)
     this.turnIntoProject = this.turnIntoProject.bind(this)
+    this.createBoardInProject = this.createBoardInProject.bind(this)
   }
 
   changeCardName(e) {
@@ -130,11 +131,23 @@ export default class O_CardOpen extends React.Component {
   }
 
   turnIntoProject() {
-    const { card } = this.props
-
-    const card_link = '../cards/' + card.id
-
+    const { boards, card } = this.props
+    const card_link = '../../cards/' + card.id
     let self = this
+    var generalBoard = ''
+    var prioritiesBoard = ''
+
+    boards.map(board => {
+      switch (board.name) {
+        case 'General':
+          generalBoard = board
+          break;
+        case 'Priorities':
+          prioritiesBoard = board
+          break;
+        default:
+      }
+    })
 
     $.ajax({
       dataType: 'JSON',
@@ -142,12 +155,46 @@ export default class O_CardOpen extends React.Component {
       type: "PATCH",
       data: { card: { type: 'Project'  } },
       success: response => {
-        console.log("it worked!", response);
+        console.log("task turned into project", response);
       }
     })
     .done(function() {
       console.log( "success" );
-      window.location = "../../react/projects";
+      self.createBoardInProject(generalBoard)
+      self.createBoardInProject(prioritiesBoard)
+      window.location = "../../react/projects/" + card.id;
+    })
+    .fail(function() {
+      console.log( "error" );
+    })
+    .always(function() {
+      console.log( "complete" );
+    });
+  }
+
+  createBoardInProject(board) {
+    const { card } = this.props
+
+    const link = '../../board_in_projects'
+
+    let self = this
+
+    $.ajax({
+      dataType: 'JSON',
+      url: link,
+      type: "POST",
+      data: {
+        board_in_project: {
+          project_id: card.id,
+          board_id: board.id
+        }
+      },
+      success: response => {
+        console.log("created board_in_project", response);
+      }
+    })
+    .done(function() {
+      console.log( "success" );
     })
     .fail(function() {
       console.log( "error" );

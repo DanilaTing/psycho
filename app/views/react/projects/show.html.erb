@@ -1,13 +1,8 @@
 <%= react_component("Project",
   props: {
+    user: @user,
     project: @project,
-    boards: @boards,
-    generalBoard: @general_board,
-    projectsBoards: @projects_boards,
-    inboxColumn: @inbox_column,
-    doneColumn: @done_column,
-    cardInColumns: @card_in_columns,
-    tasks: @tasks
+    boards: @boards
   },
   prerender: false)
 %>

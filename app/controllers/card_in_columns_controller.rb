@@ -37,6 +37,16 @@ class CardInColumnsController < ApplicationController
   def create
     @card_in_column = CardInColumn.new(card_in_column_params)
 
+    @user = current_user
+    @card_in_column.user_id = @user.id
+    
+    @general_board = @user.boards.find_by(general: true)
+    @inbox = @general_board.columns.find_by(name: 'Inbox')
+
+    if @card_in_column.column_id = ''
+      @card_in_column.column_id = @inbox.id
+    end
+
     respond_to do |format|
       if @card_in_column.save
         format.html { redirect_to @card_in_column, notice: 'Video was successfully created.' }
@@ -79,7 +89,7 @@ class CardInColumnsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def card_in_column_params
-      params.require(:card_in_column).permit(:column_id, :card_id)
+      params.require(:card_in_column).permit(:column_id, :card_id, :user_id)
     end
 
 end

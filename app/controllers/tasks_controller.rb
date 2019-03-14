@@ -32,6 +32,9 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
 
+    @user = current_user
+    @task.user_id = @user.id
+
     respond_to do |format|
       if @task.save
         format.html { redirect_to root_path, notice: 'Task was successfully created.' }
@@ -75,6 +78,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:project_id, :name, :description, card_in_columns_attributes: [:id, :column_id, :card_id])
+      params.require(:task).permit(:project_id, :name, :description, :user_id, card_in_columns_attributes: [:id, :column_id, :card_id])
     end
 end

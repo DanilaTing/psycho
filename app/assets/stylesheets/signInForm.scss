@@ -1,0 +1,52 @@
+.signInForm {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  div {
+    margin-top: -100px;
+    text-align: center;
+
+    h1 {
+      font-size: 36px;
+    }
+
+    p {
+      color: grey;
+      margin-top: 20px;
+      font-size: 20px;
+      line-height: 30px;
+
+      a {
+        color: blue;
+      }
+    }
+  }
+}
+
+.login, .signup {
+  width: 100vw;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  div {
+    h2 {
+      font-size: 20px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    .field {
+      margin-bottom: 10px;
+    }
+  }
+}

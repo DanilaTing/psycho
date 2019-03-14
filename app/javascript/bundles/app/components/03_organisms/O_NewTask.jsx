@@ -34,22 +34,27 @@ export default class O_NewTask extends React.Component {
   }
 
   saveCard(e) {
-    const { project } = this.props
+    const { project, user, columnId, pushNewTaskToTasks } = this.props
     const { name, description} = this.state
-    const card_link = '../../tasks'
+    const card_link = '../../cards'
     let self = this
 
     const data = {
-      task: {
+      card: {
+        type: 'Task',
         name: name,
-        description: description
-      }
+        description: description,
+        user_id: user.id
+      },
+      column_id: columnId
     }
 
     if (project) {
-      data.task = {
+      data.card = {
+        type: 'Task',
         name: name,
         description: description,
+        user_id: user.id,
         project_id: project.id
       }
     }
@@ -60,51 +65,14 @@ export default class O_NewTask extends React.Component {
       type: "POST",
       data: data,
       success: response => {
-        console.log("it worked!", response);
+        console.log("card created: ", response);
+        pushNewTaskToTasks(response)
       }
     })
     .done(function() {
       console.log( "success" );
       self.props.closeNewTask()
-      self.updateCardInColumn()
-      window.location.reload()
-    })
-    .fail(function() {
-      console.log( "error" );
-    })
-    .always(function() {
-      console.log( "complete" );
-    });
-  }
-
-  updateCardInColumn() {
-    const cardInColumnIds = []
-    this.props.cardInColumns.map((cardInColumn) => {
-      cardInColumnIds.push(
-        cardInColumn.id
-      )
-    })
-    console.log(cardInColumnIds);
-    const newId = Math.max.apply(null, cardInColumnIds) + 1
-    console.log('newId ' + newId);
-
-    const columnId = this.props.columnId
-
-    $.ajax({
-      dataType: 'JSON',
-      url: '../../card_in_columns/' + newId,
-      type: "PATCH",
-      data: { card_in_column:
-        {
-          column_id: columnId,
-        },
-      },
-      success: response => {
-        console.log("it worked!", response);
-      }
-    })
-    .done(function() {
-      console.log( "success" );
+      // window.location.reload()
     })
     .fail(function() {
       console.log( "error" );
