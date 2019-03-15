@@ -15,6 +15,7 @@ export default class Tasks extends React.Component {
     this.renderNewTask = this.renderNewTask.bind(this)
     this.closeNewTask = this.closeNewTask.bind(this)
     this.pushNewTaskToTasks = this.pushNewTaskToTasks.bind(this)
+    this.onBoardClick = this.onBoardClick.bind(this)
 
     this.state = {
       tasks: '',
@@ -23,6 +24,12 @@ export default class Tasks extends React.Component {
       currentBoard: 'General',
       columnFromWhereCreated: ''
     }
+  }
+
+  onBoardClick(currentBoard) {
+    this.setState({
+      currentBoard
+    })
   }
 
   componentWillMount() {
@@ -127,6 +134,7 @@ export default class Tasks extends React.Component {
         <O_SubMenubar
           boards       = { boards }
           currentBoard = { this.state.currentBoard }
+          onBoardClick = { this.onBoardClick }
         />
         { this.renderCurrentBoard() }
       </section>

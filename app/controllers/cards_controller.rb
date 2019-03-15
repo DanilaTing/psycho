@@ -65,6 +65,13 @@ class CardsController < ApplicationController
         @column_id = params[:column_id]
         @card_in_column = @card.card_in_columns.create(card_id: @card.id, column_id: @column_id, user_id: @user.id)
         @card_in_column.save
+
+
+        @none_column = Column.find_by(name: 'None')
+        #строчка column_id не равна числу
+        @card_in_column = @card.card_in_columns.create(card_id: @card.id, column_id: @none_column.id, user_id: @user.id)
+        @card_in_column.save
+
       else
         format.html { render :new }
         format.json { render json: @card.errors, status: :unprocessable_entity }
