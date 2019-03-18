@@ -39,7 +39,7 @@ class CardInColumnsController < ApplicationController
 
     @user = current_user
     @card_in_column.user_id = @user.id
-    
+
     @general_board = @user.boards.find_by(general: true)
     @inbox = @general_board.columns.find_by(name: 'Inbox')
 
@@ -64,9 +64,10 @@ class CardInColumnsController < ApplicationController
   def update
     respond_to do |format|
       if @card_in_column.update(card_in_column_params)
-
+        format.json { render json: @card_in_column.as_json(include: { card: { only: [:id, :name, :description, :project_id, :type] } }), status: :ok }
       else
-
+        format.html { render :edit }
+        format.json { render json: @card.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -89,7 +90,7 @@ class CardInColumnsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def card_in_column_params
-      params.require(:card_in_column).permit(:column_id, :card_id, :user_id)
+      params.require(:card_in_column).permit(:column_id, :card_id, :user_id, :position)
     end
 
 end

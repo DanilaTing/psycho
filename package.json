@@ -8,6 +8,7 @@
     "normalize.css": "^8.0.1",
     "prop-types": "^15.6.2",
     "react": "^16.6.0",
+    "react-beautiful-dnd": "^10.1.0",
     "react-dom": "^16.6.0",
     "react-hot-loader": "^4.3.12",
     "react-on-rails": "11.1.8",

@@ -49,6 +49,23 @@ class CardsController < ApplicationController
     end
   end
 
+  def put_in_inbox(card)
+    @inbox_column = Column.find_by(name: 'Inbox')
+    @card_in_column = card.card_in_columns.create(card_id: @card.id, column_id: @inbox_column.id, user_id: @user.id)
+    @card_in_column.save
+  end
+
+  def put_in_priorities_none(card)
+    @none_column = Column.find_by(name: 'None')
+    @card_in_column = card.card_in_columns.create(card_id: @card.id, column_id: @none_column.id, user_id: @user.id)
+    @card_in_column.save
+  end
+
+  def put_in_column(card, column_id)
+    @card_in_column = card.card_in_columns.create(card_id: @card.id, column_id: column_id, user_id: @user.id)
+    @card_in_column.save
+  end
+
   # POST /cards
   # POST /cards.json
   def create
@@ -56,22 +73,39 @@ class CardsController < ApplicationController
     @user = current_user
 
     respond_to do |format|
+      @inbox_column = Column.find_by(name: 'Inbox')
+      @none_column = Column.find_by(name: 'None')
+
       if @card.save
         # format.html { redirect_to @card, notice: 'Card was successfully created.' }
         # format.json { render :show, status: :created, location: @card }
-        format.json { render json: @card.as_json(only: [:id, :name, :description, :project_id, :type], include: :card_in_columns), status: :ok }
+        format.json { render json:
+        @card.as_json(
+          only: [:id, :name, :description, :project_id, :type],
+          include: { card_in_columns: {
+          include: { card: {
+          only: [:id, :name, :description, :project_id, :type]
+        }}}}),
+        status: :ok }
         # render json: [@card], status: :ok
+        if params[:column_id]
+          @column_id = params[:column_id]
+          @column = Column.find_by(id: @column_id)
+          @board = @column.board
 
-        @column_id = params[:column_id]
-        @card_in_column = @card.card_in_columns.create(card_id: @card.id, column_id: @column_id, user_id: @user.id)
-        @card_in_column.save
+          if @board.name == 'General'
+            put_in_column(@card, params[:column_id])
+            put_in_priorities_none(@card)
+          end
 
-
-        @none_column = Column.find_by(name: 'None')
-        #строчка column_id не равна числу
-        @card_in_column = @card.card_in_columns.create(card_id: @card.id, column_id: @none_column.id, user_id: @user.id)
-        @card_in_column.save
-
+          if @board.name == 'Priorities'
+            put_in_column(@card, params[:column_id])
+            put_in_inbox(@card)
+          end
+        else
+          put_in_priorities_none(@card)
+          put_in_inbox(@card)
+        end
       else
         format.html { render :new }
         format.json { render json: @card.errors, status: :unprocessable_entity }
@@ -108,10 +142,12 @@ class CardsController < ApplicationController
   # DELETE /cards/1
   # DELETE /cards/1.json
   def destroy
+    card_id = @card.id
     @card.destroy
+
     respond_to do |format|
-      format.html { redirect_to cards_url, notice: 'Card was successfully destroyed.' }
-      format.json { head :no_content }
+      # format.html { redirect_to cards_url, notice: 'Card was successfully destroyed.' }
+      format.json { render json: { cardId: card_id } }
     end
   end
 

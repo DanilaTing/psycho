@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Droppable } from 'react-beautiful-dnd';
 import O_Card from '../03_organisms/O_Card';
 import Turbolinks from 'turbolinks';
 
@@ -8,88 +9,53 @@ export default class O_Column extends React.Component {
     super(props);
   }
 
-  sortCards(c) {
-    c.sort(function(a, b) {
-      return b.id - a.id
+  sortCards(cardInColumns) {
+    cardInColumns.sort(function(a, b) {
+      return a.position - b.position
     });
   }
 
   renderCards() {
-    const { boards, column, cards, project, projectTasks } = this.props
-    let cardsToRender = []
+    const { boards, column, cards, cardInColumns, project, projectTasks } = this.props
+    let cardInColArr = []
 
     if (project) {
-      cards.map((card, i) => {
+      cards.map(card => {
         if (card.project_id == project.id) {
-          card.card_in_columns.map(card_in_column => {
-            if (column.id == card_in_column.column_id) {
-              cardsToRender.push(
-                card
-              )
+          cardInColumns.map(c => {
+            if (card.id = c.card_id && column.id == c.column_id) {
+              cardInColArr.push(c)
             }
           })
         }
       })
+    } else if (column.name == 'Inbox' || 'Done') {
+      cardInColumns.map(c => {
+        if (column.id == c.column_id) {
+          cardInColArr.push(c)
+        }
+      })
     } else {
-      cards.map((card, i) => {
-        card.card_in_columns.map(card_in_column => {
-          if (column.id == card_in_column.column_id) {
-            cardsToRender.push(
-              card
-            )
-          }
-        })
+      cardInColumns.map(c => {
+        if (column.id == c.column_id) {
+          cardInColArr.push(c)
+        }
       })
     }
 
-    console.log('BEFORE SORT: ', cardsToRender);
+    console.log(cardInColArr);
 
-    var sorted = cardsToRender.sort(function(a, b) {
-      return b.id - a.id
-    });
-
-    console.log('AFTER SORT: ', sorted);
+    this.sortCards(cardInColArr)
 
     let arrayToRender = []
 
-    sorted.map((card, i) => {
+    cardInColArr.map((c, i) => {
       arrayToRender.push(
         <O_Card
-          boards = { boards }
           key    = { i }
-          card   = { card }
-          open   = { false }
-        />
-      )
-    })
-
-    return arrayToRender
-  }
-
-  renderInboxAndDoneCards() {
-    const { boards, column, cards } = this.props
-    let cardsToRender = []
-
-    cards.map((card, i) => {
-      card.card_in_columns.map(card_in_column => {
-        if (column.id == card_in_column.column_id) {
-          cardsToRender.push(
-            card
-          )
-        }
-      })
-    })
-
-    this.sortCards(cardsToRender)
-
-    let arrayToRender = []
-
-    cardsToRender.map((cardToRender, i) => {
-      arrayToRender.push(
-        <O_Card
+          index  = { i }
           boards = { boards }
-          key    = { i }
-          card   = { cardToRender }
+          card   = { c.card }
           open   = { false }
         />
       )
@@ -99,30 +65,45 @@ export default class O_Column extends React.Component {
   }
 
   render() {
-    const { renderNewTask } = this.props
+    const { renderNewTask, column } = this.props
     const { name, id } = this.props.column
 
     if (name == "Done") {
       return (
-        <div className="column general done">
-          <p className="columnHeading">{ name }</p>
-          { this.renderInboxAndDoneCards() }
-        </div>
+        <Droppable droppableId={ column.id.toString() }>
+          {(provided) => (
+            <div className="column general done" ref={ provided.innerRef } { ...provided.droppableProps }>
+              <p className="columnHeading">{ name }</p>
+              { this.renderCards() }
+              { provided.placeholder }
+            </div>
+          )}
+        </Droppable>
       )
     } else if (name == "Inbox") {
       return (
-        <div className="column general inbox">
-          <p className="columnHeading">{ name }</p>
-          { this.renderInboxAndDoneCards() }
-        </div>
+        <Droppable droppableId={ column.id.toString() }>
+          {(provided) => (
+            <div className="column general inbox" ref={ provided.innerRef } { ...provided.droppableProps }>
+              <p className="columnHeading">{ name }</p>
+              { this.renderCards() }
+              { provided.placeholder }
+            </div>
+          )}
+        </Droppable>
       )
     } else {
       return (
-        <div className="column">
-          <p className="columnHeading">{ name }</p>
-          { this.renderCards() }
-          <div className="addTaskInColumn" onClick={ () => renderNewTask(id) }>Add a task...</div>
-        </div>
+        <Droppable droppableId={ column.id.toString() }>
+          {(provided) => (
+            <div className="column" ref={ provided.innerRef } { ...provided.droppableProps }>
+              <p className="columnHeading">{ name }</p>
+              { this.renderCards() }
+              { provided.placeholder }
+              <div className="addTaskInColumn" onClick={ ()=>this.props.renderNewTask(id) }>Add a task...</div>
+            </div>
+          )}
+        </Droppable>
       )
     }
   }

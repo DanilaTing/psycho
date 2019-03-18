@@ -4,11 +4,17 @@ class React::TasksController < ApplicationController
 
   def index
     @user = current_user
+    @are_tasks = true
 
     if user_signed_in?
       @boards = @user.boards.as_json(include: { columns: {
                                                 include: { cards: {
-                                                           only: [:id, :name, :description, :project_id, :type], include: :card_in_columns
+                                                           only: [:id, :name, :description, :project_id, :type],
+                                                           include: { card_in_columns: {
+                                                                      include: { card: {
+                                                                                 only: [:id, :name, :description, :project_id, :type],
+                                                                      } }
+                                                           } }
                                                          }}
       } })
     end
