@@ -101,6 +101,7 @@ export default class Project extends React.Component {
 
     return(
       <O_Board
+        boards             = { boards }
         board              = { boardToRender }
         project            = { project }
         cards              = { tasks }

@@ -9,9 +9,23 @@ export default class O_CardClosed extends React.Component {
   }
 
   render() {
-    const { triggerCard, name, card } = this.props
+    const { triggerCard, name, card, boards } = this.props
     const { type, id } = card
     const link = '../react/projects/' + id
+    var project
+
+    if (card.project_id != '') {
+      boards.map(board => {
+        board.columns.map(column => {
+          column.cards.map(c => {
+            if (c.id == card.project_id) {
+              project = c
+            }
+          })
+        })
+      })
+    }
+
     if (type == 'Project') {
       return (
         <a href={ link }>
@@ -27,6 +41,7 @@ export default class O_CardClosed extends React.Component {
         <div className="card closed" onClick={ triggerCard } draggable={true}>
           <div className="content">
             <p>{ name }</p>
+            { project ? (<a href={'../react/projects/' + project.id} className='projectLabel'>{ project.name }</a>) : '' }
           </div>
         </div>
       )

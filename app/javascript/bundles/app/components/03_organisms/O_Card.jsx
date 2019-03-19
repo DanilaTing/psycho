@@ -45,6 +45,7 @@ export default class O_Card extends React.Component {
     if (open == false) {
       return (
         <O_CardClosed
+          boards      = { boards }
           name        = { name }
           card        = { card }
           triggerCard = { this.triggerCard }
@@ -54,6 +55,7 @@ export default class O_Card extends React.Component {
       return (
         <div>
           <O_CardClosed
+            boards      = { boards }
             triggerCard = { this.triggerCard }
             name        = { this.state.name }
             card        = { card }
