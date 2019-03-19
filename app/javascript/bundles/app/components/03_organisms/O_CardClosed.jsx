@@ -36,6 +36,7 @@ export default class O_CardClosed extends React.Component {
           </div>
         </a>
       )
+      
     } else if (type == 'Task') {
       return (
         <div className="card closed" onClick={ triggerCard } draggable={true}>
