@@ -2,8 +2,9 @@
   <%= react_component("Tasks",
     props: {
       user: @user,
-      are_tasks: @are_tasks,
-      boards: @boards
+      are_tasks: true,
+      boards: @boards,
+      activeMenuTab: 'Tasks'
     },
     prerender: false)
   %>

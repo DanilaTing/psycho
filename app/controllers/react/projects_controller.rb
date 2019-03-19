@@ -5,7 +5,6 @@ class React::ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @user = current_user
-    @are_projects = true
 
     if user_signed_in?
       @boards = @user.boards.as_json(include: { columns: {
@@ -30,19 +29,15 @@ class React::ProjectsController < ApplicationController
       @project.as_json
       @boards = @project.boards.as_json(include: { columns: {
                                                 include: { cards: {
-                                                           only: [:id, :name, :description, :project_id, :type], include: :card_in_columns
+                                                           only: [:id, :name, :description, :project_id, :type],
+                                                           include: { card_in_columns: {
+                                                                      include: { card: {
+                                                                                 only: [:id, :name, :description, :project_id, :type],
+                                                                      } }
+                                                           } }
                                                          }}
       } })
     end
-
-    # @project.as_json(include: [:tasks, :boards])
-    # @boards = Board.all
-    # @general_board = Board.find_by(general: true).as_json(include: :columns)
-    # @projects_boards = @project.boards.as_json(include: :columns)
-    # @inbox_column = Column.find_by(name: 'Inbox')
-    # @done_column = Column.find_by(name: 'Done')
-    # @card_in_columns = CardInColumn.all
-    # @tasks = Card.where(type: 'Task').as_json(only: [:id, :name, :description, :project_id, :type], include: :card_in_columns)
   end
 
   # GET /projects/new

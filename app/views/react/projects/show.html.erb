@@ -1,8 +1,13 @@
-<%= react_component("Project",
-  props: {
-    user: @user,
-    project: @project,
-    boards: @boards
-  },
-  prerender: false)
-%>
+<% if user_signed_in? %>
+  <%= react_component("Tasks",
+    props: {
+      user: @user,
+      are_tasks: true,
+      project: @project,
+      boards: @boards
+    },
+    prerender: false)
+  %>
+<% else %>
+  <%= render 'sign_in_form' %>
+<% end %>

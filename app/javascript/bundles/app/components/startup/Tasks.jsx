@@ -25,7 +25,8 @@ export default class Tasks extends React.Component {
       newTaskVisible: false,
       currentBoard: 'General',
       columnFromWhereCreated: '',
-      activeMenuTab: ''
+      activeMenuTab: this.props.activeMenuTab,
+      project: this.props.project
     }
   }
 
@@ -63,20 +64,11 @@ export default class Tasks extends React.Component {
       })
     })
 
-    var activeMenuTab
-    if (are_tasks == true) {
-      activeMenuTab = 'Tasks'
-    }
-    if (are_projects == true) {
-      activeMenuTab = 'Projects'
-    }
-
     this.setState({
       cards: cards,
       cardInColumns: cardInColumns,
       columnFromWhereCreated: inboxId,
-      inboxId: inboxId,
-      activeMenuTab: activeMenuTab
+      inboxId: inboxId
     })
   }
 
@@ -151,13 +143,14 @@ export default class Tasks extends React.Component {
 
   render() {
     const { boards, user } = this.props
-    const { columnFromWhereCreated, inboxId, activeMenuTab } = this.state
+    const { columnFromWhereCreated, inboxId, activeMenuTab, project } = this.state
 
     return (
       <section>
         { this.state.newTaskVisible ? (
           <O_NewTask
             closeNewTask       = { this.closeNewTask }
+            project            = { project }
             boards             = { boards }
             user               = { user }
             columnId           = { columnFromWhereCreated }

@@ -22,7 +22,6 @@ export default class O_CardClosed extends React.Component {
                 onClick={ triggerCard }
                 ref={ provided.innerRef }
                 { ...provided.draggableProps }
-                { ...provided.dragHandleProps }
               >
                 <div className="content">
                   <p>{ name }</p>
@@ -41,6 +40,7 @@ export default class O_CardClosed extends React.Component {
               ref={ provided.innerRef }
               { ...provided.draggableProps }
               { ...provided.dragHandleProps }
+              mode="SNAP"
             >
               <div className="content">
                 <p>{ name }</p>

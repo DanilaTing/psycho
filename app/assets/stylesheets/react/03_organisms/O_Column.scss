@@ -11,6 +11,8 @@
 .column {
   position: relative;
   background-color: #F4F4F4;
+  width: 250px;
+  max-width: 250px;
   min-width: 250px;
   min-height: 100px;
   height: calc(100vh - 170px);

@@ -10,7 +10,9 @@ end
 gem 'rails', '~> 5.1.6'
 gem 'rake', '12.3.2'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# gem 'sqlite3'
+# User PostgreSQL to Avoid DB Lock
+gem 'pg'
 # Seed dump gem for creating db from existing stuff
 gem 'seed_dump'
 # Use Puma as the app server

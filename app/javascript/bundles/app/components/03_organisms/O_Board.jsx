@@ -12,7 +12,8 @@ export default class O_Board extends React.Component {
     super(props);
 
     this.state = {
-      cardInColumns: this.props.cardInColumns
+      cardInColumns: this.props.cardInColumns,
+      columns: this.props.board.columns
     }
 
     this.updateState = this.updateState.bind(this)
@@ -113,7 +114,7 @@ export default class O_Board extends React.Component {
 
   onDragEnd = result => {
     console.log('DRAG END RESULT: ', result);
-    const { boards, cards } = this.props
+    const { project, boards, cards } = this.props
     const { draggableId, destination, source } = result
     var draggedCard, columnWhereDragged
 

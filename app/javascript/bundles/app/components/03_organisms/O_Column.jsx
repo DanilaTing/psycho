@@ -15,23 +15,44 @@ export default class O_Column extends React.Component {
     });
   }
 
+  renderInboxAdDoneCards() {
+    const { boards, column, cards, cardInColumns, project, projectTasks } = this.props
+    let cardInColArr = []
+
+    if (column.name == 'Inbox' || 'Done') {
+      cardInColumns.map(c => {
+        if (column.id == c.column_id) {
+          cardInColArr.push(c)
+        }
+      })
+    }
+
+    this.sortCards(cardInColArr)
+
+    let arrayToRender = []
+
+    cardInColArr.map((c, i) => {
+      arrayToRender.push(
+        <O_Card
+          key    = { i }
+          index  = { i }
+          boards = { boards }
+          card   = { c.card }
+          open   = { false }
+        />
+      )
+    })
+
+    return arrayToRender
+  }
+
   renderCards() {
     const { boards, column, cards, cardInColumns, project, projectTasks } = this.props
     let cardInColArr = []
 
     if (project) {
-      cards.map(card => {
-        if (card.project_id == project.id) {
-          cardInColumns.map(c => {
-            if (card.id = c.card_id && column.id == c.column_id) {
-              cardInColArr.push(c)
-            }
-          })
-        }
-      })
-    } else if (column.name == 'Inbox' || 'Done') {
       cardInColumns.map(c => {
-        if (column.id == c.column_id) {
+        if (c.card.project_id == project.id && c.card.id == c.card_id && column.id == c.column_id) {
           cardInColArr.push(c)
         }
       })
@@ -72,7 +93,7 @@ export default class O_Column extends React.Component {
           {(provided) => (
             <div className="column general done" ref={ provided.innerRef } { ...provided.droppableProps }>
               <p className="columnHeading">{ name }</p>
-              { this.renderCards() }
+              { this.renderInboxAdDoneCards() }
               { provided.placeholder }
             </div>
           )}
@@ -84,7 +105,7 @@ export default class O_Column extends React.Component {
           {(provided) => (
             <div className="column general inbox" ref={ provided.innerRef } { ...provided.droppableProps }>
               <p className="columnHeading">{ name }</p>
-              { this.renderCards() }
+              { this.renderInboxAdDoneCards() }
               { provided.placeholder }
             </div>
           )}
