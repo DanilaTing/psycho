@@ -16,7 +16,7 @@ export default class O_Column extends React.Component {
   }
 
   renderCards() {
-    const { boards, column, cards, cardInColumns, project, projectTasks } = this.props
+    const { boards, column, cards, cardInColumns, project, projectTasks, columns } = this.props
     let cardInColArr = []
 
     if (project) {
@@ -24,7 +24,8 @@ export default class O_Column extends React.Component {
         if (card.project_id == project.id) {
           cardInColumns.map(c => {
             if (card.id = c.card_id && column.id == c.column_id) {
-              cardInColArr.push(c)
+              const columnName = columns.find(item => item.id === c.column_id).name
+              cardInColArr.push({...c, columnName })
             }
           })
         }
@@ -32,13 +33,15 @@ export default class O_Column extends React.Component {
     } else if (column.name == 'Inbox' || 'Done') {
       cardInColumns.map(c => {
         if (column.id == c.column_id) {
-          cardInColArr.push(c)
+          const columnName = columns.find(item => item.id === c.column_id).name
+          cardInColArr.push({...c, columnName })
         }
       })
     } else {
       cardInColumns.map(c => {
         if (column.id == c.column_id) {
-          cardInColArr.push(c)
+          const columnName = columns.find(item => item.id === c.column_id).name
+          cardInColArr.push({...c, columnName })
         }
       })
     }
@@ -52,11 +55,12 @@ export default class O_Column extends React.Component {
     cardInColArr.map((c, i) => {
       arrayToRender.push(
         <O_Card
-          key    = { i }
-          index  = { i }
-          boards = { boards }
-          card   = { c.card }
-          open   = { false }
+          key      = { i }
+          index    = { i }
+          boards   = { boards }
+          card     = { c.card }
+          open     = { false }
+          priority = { c.columnName }
         />
       )
     })

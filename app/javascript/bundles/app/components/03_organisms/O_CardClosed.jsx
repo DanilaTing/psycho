@@ -10,15 +10,39 @@ export default class O_CardClosed extends React.Component {
   }
 
   render() {
-    const { triggerCard, name, card, index } = this.props
+    const { triggerCard, name, card, index, priority } = this.props
     const { type, id } = card
     const link = '../react/projects/' + id
+
+    let className = ''
+    switch (priority) {
+      // case 'None': {
+      //   className = 'card_none'
+      //   break
+      // }
+
+      case 'High': {
+        className = 'card_high'
+        break
+      }
+
+      case 'Middle': {
+        className = 'card_middle'
+        break
+      }
+
+      case 'Low': {
+        className = 'card_low'
+        break
+      }
+    }
+
     if (type == 'Project') {
       return (
         <Draggable draggableId={ card.id } index={ index }>
           {(provided) => (
             <a href={ link }>
-              <div className="card closed"
+              <div className={ "card closed " + className }
                 onClick={ triggerCard }
                 ref={ provided.innerRef }
                 { ...provided.draggableProps }
@@ -36,7 +60,7 @@ export default class O_CardClosed extends React.Component {
       return (
         <Draggable draggableId={ card.id } index={ index }>
           {(provided) => (
-            <div className="card closed"
+            <div className={ "card closed " + className }
               onClick={ triggerCard }
               ref={ provided.innerRef }
               { ...provided.draggableProps }

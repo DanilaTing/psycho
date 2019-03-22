@@ -39,7 +39,7 @@ export default class O_Card extends React.Component {
   }
 
   render() {
-    const { boards, card, index } = this.props
+    const { boards, card, index, priority } = this.props
     const { open, name, description } = this.state
 
     if (open == false) {
@@ -49,6 +49,7 @@ export default class O_Card extends React.Component {
           name        = { name }
           card        = { card }
           triggerCard = { this.triggerCard }
+          priority    = { priority }
         />
       )
     } else {
@@ -59,6 +60,7 @@ export default class O_Card extends React.Component {
             triggerCard = { this.triggerCard }
             name        = { this.state.name }
             card        = { card }
+            priority    = { priority }
           />
           <O_CardOpen
             boards                = { boards }

@@ -34,6 +34,7 @@ export default class O_Board extends React.Component {
           cardInColumns = { cardInColumns }
           projectTasks  = { projectTasks }
           renderNewTask = { renderNewTask }
+          columns       = { board.columns }
         />
       )
     })

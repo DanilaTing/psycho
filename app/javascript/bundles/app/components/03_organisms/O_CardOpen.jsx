@@ -116,7 +116,7 @@ export default class O_CardOpen extends React.Component {
       type: "DELETE",
       success: response => {
         console.log("it worked!", response);
-        // window.location.reload()
+        window.location.reload()
       }
     })
     .done(function() {
