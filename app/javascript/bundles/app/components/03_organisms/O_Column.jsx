@@ -16,7 +16,7 @@ export default class O_Column extends React.Component {
   }
 
   renderCards() {
-    const { boards, column, cards, cardInColumns, project, projectTasks, columns } = this.props
+    const { boards, column, cards, cardInColumns, project, projectTasks, columns, lowPriorityCards, middlePriorityCards, highPriorityCards } = this.props
     let cardInColArr = []
 
     if (project) {
@@ -53,6 +53,24 @@ export default class O_Column extends React.Component {
     let arrayToRender = []
 
     cardInColArr.map((c, i) => {
+      let cardPriority = c.columnName
+      if (lowPriorityCards && middlePriorityCards && highPriorityCards) {
+        let priorityCard = lowPriorityCards.cards.find(item => item.name === c.card.name)
+        if (priorityCard) {
+          cardPriority = 'Low'
+        } else {
+          priorityCard = middlePriorityCards.cards.find(item => item.name === c.card.name);
+          if (priorityCard) {
+            cardPriority = 'Middle'
+          } else {
+            priorityCard = highPriorityCards.cards.find(item => item.name === c.card.name);
+            if (priorityCard) {
+              cardPriority = 'High'
+            }
+          }
+        }
+      }
+
       arrayToRender.push(
         <O_Card
           key      = { i }
@@ -60,7 +78,8 @@ export default class O_Column extends React.Component {
           boards   = { boards }
           card     = { c.card }
           open     = { false }
-          priority = { c.columnName }
+          priority = { cardPriority || c.columnName }
+          onSave   = { this.props.onSave }
         />
       )
     })

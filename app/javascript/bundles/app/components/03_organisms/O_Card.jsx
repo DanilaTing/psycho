@@ -27,9 +27,14 @@ export default class O_Card extends React.Component {
   }
 
   triggerCard() {
-    this.setState({
-      open: !this.state.open
-    })
+    this.setState(
+      prevState => ({ open: !prevState.open}),
+      () => {
+        if (!this.state.open) {
+          this.props.onSave()
+        }
+      }
+    ) 
   }
 
   updateCardName(name) {

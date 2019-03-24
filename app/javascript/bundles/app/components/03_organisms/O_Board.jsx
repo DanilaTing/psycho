@@ -19,7 +19,7 @@ export default class O_Board extends React.Component {
   }
 
   renderCurrentBoardColumns() {
-    const { boards, board, cards, renderNewTask, projectTasks, project } = this.props
+    const { boards, board, cards, renderNewTask, projectTasks, project, lowPriorityCards, middlePriorityCards, highPriorityCards } = this.props
     const { cardInColumns } = this.state
     let columns = []
 
@@ -35,6 +35,10 @@ export default class O_Board extends React.Component {
           projectTasks  = { projectTasks }
           renderNewTask = { renderNewTask }
           columns       = { board.columns }
+          lowPriorityCards = { lowPriorityCards }
+          middlePriorityCards = { middlePriorityCards }
+          highPriorityCards = { highPriorityCards }
+          onSave = { this.props.onSave }
         />
       )
     })

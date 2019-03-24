@@ -19,6 +19,9 @@ export default class Tasks extends React.Component {
     this.updateCardInColumns = this.updateCardInColumns.bind(this)
     this.onBoardClick = this.onBoardClick.bind(this)
 
+    const priorityBoard = props.boards.find(item => item.name === 'Priorities');
+    console.log(priorityBoard)
+
     this.state = {
       cards: [],
       cardInColumns: [],
@@ -26,12 +29,39 @@ export default class Tasks extends React.Component {
       newTaskVisible: false,
       currentBoard: 'General',
       columnFromWhereCreated: '',
-      activeMenuTab: ''
+      activeMenuTab: '',
+      lowPriorityCards: priorityBoard.columns.find(item => item.name === 'Low'),
+      middlePriorityCards: priorityBoard.columns.find(item => item.name === 'Middle'),
+      highPriorityCards: priorityBoard.columns.find(item => item.name === 'High')
+    }
+  }
+
+  setPriorities = () => {
+    const priorityBoard = this.props.boards.find(item => item.name === 'Priorities')
+    this.setState({
+      lowPriorityCards: priorityBoard.columns.find(item => item.name === 'Low'),
+      middlePriorityCards: priorityBoard.columns.find(item => item.name === 'Middle'),
+      highPriorityCards: priorityBoard.columns.find(item => item.name === 'High')
+    })
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevState.currentBoard !== this.state.currentBoard) {
+      if (this.state.currentBoard === 'General') {
+        this.setPriorities()
+      } else {
+        this.setState({
+          lowPriorityCards: null,
+          middlePriorityCards: null,
+          highPriorityCards: null
+        })
+      }
     }
   }
 
   componentWillMount() {
     const { boards, are_tasks, are_projects } = this.props
+    console.log(boards)
     let cards = []
     let cardInColumns = []
     var inboxId
@@ -135,8 +165,11 @@ export default class Tasks extends React.Component {
 
   renderCurrentBoard() {
     const { project } = this.props
-    const { currentBoard, cards, cardInColumns } = this.state
+    const { currentBoard, cards, cardInColumns, lowPriorityCards, middlePriorityCards, highPriorityCards } = this.state
     const { boards } = this.props
+
+    console.log(lowPriorityCards, middlePriorityCards, highPriorityCards)
+
     let boardToRender
 
     boards.map(board => {
@@ -154,6 +187,13 @@ export default class Tasks extends React.Component {
         cardInColumns       = { cardInColumns }
         renderNewTask       = { this.renderNewTask }
         updateCardInColumns = { this.updateCardInColumns }
+        lowPriorityCards = {lowPriorityCards}
+        middlePriorityCards = {middlePriorityCards}
+        highPriorityCards = {highPriorityCards}
+        onSave = { () => {
+          this.setPriorities()
+          this.forceUpdate()
+        }}
       />
     )
   }
