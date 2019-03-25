@@ -49,6 +49,8 @@ export default class O_NewTask extends React.Component {
       column_id: columnId
     }
 
+    this.props.onSave(data)
+
     if (project) {
       data.card = {
         type: 'Task',

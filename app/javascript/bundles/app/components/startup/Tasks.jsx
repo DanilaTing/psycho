@@ -45,6 +45,34 @@ export default class Tasks extends React.Component {
     })
   }
 
+  addPriorityCard = (data) => {
+    const priorityBoard = this.props.boards.find(item => item.name === 'Priorities')
+    const priorityColumnsIds = {}
+    priorityBoard.columns
+      .filter(item => item.name === 'Low' || item.name === 'Middle' || item.name === 'High')
+      .forEach(item => priorityColumnsIds[item.id] = item.name)
+    switch(priorityColumnsIds[data.column_id]) {
+      case 'Low': {
+        const lowPriorityCards = priorityBoard.columns.find(item => item.name === 'Low');
+        lowPriorityCards.cards.push(data.card)
+        this.setState({ lowPriorityCards });
+        break;
+      }
+      case 'Middle': {
+        const middlePriorityCards = priorityBoard.columns.find(item => item.name === 'Middle');
+        middlePriorityCards.cards.push(data.card)
+        this.setState({ middlePriorityCards });
+        break;
+      }
+      case 'High': {
+        const highPriorityCards = priorityBoard.columns.find(item => item.name === 'High');
+        highPriorityCards.cards.push(data.card)
+        this.setState({ highPriorityCards });
+        break;
+      }
+    }
+  }
+
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevState.currentBoard !== this.state.currentBoard) {
       if (this.state.currentBoard === 'General') {
@@ -191,8 +219,6 @@ export default class Tasks extends React.Component {
         middlePriorityCards = {middlePriorityCards}
         highPriorityCards = {highPriorityCards}
         onSave = { () => {
-          this.setPriorities()
-          this.forceUpdate()
         }}
       />
     )
@@ -211,6 +237,7 @@ export default class Tasks extends React.Component {
             user               = { user }
             columnId           = { columnFromWhereCreated }
             pushNewTaskToTasks = { this.pushNewTaskToTasks }
+            onSave             = { this.addPriorityCard }
           />
         ) : '' }
         <O_Menubar
