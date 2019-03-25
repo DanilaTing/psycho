@@ -1,53 +1,75 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Draggable } from 'react-beautiful-dnd';
+import classnames from 'classnames';
 
 import O_CardOpen from '../03_organisms/O_CardOpen';
 
 export default class O_CardClosed extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      dragging: false
+    }
+  }
+
+  onDragStart = (e, id) => {
+    const { onDragStart } = this.props.actions
+    this.setState({
+      dragging: true
+    })
+    onDragStart(e, id)
+  }
+
+  onDragEnd = () => {
+    const { onDragEnd } = this.props.actions
+    this.setState({
+      dragging: false
+    })
+    onDragEnd()
   }
 
   render() {
-    const { triggerCard, name, card, index } = this.props
-    const { type, id } = card
+    const { triggerCard, name, card, index, dragging, actions } = this.props
+    const { type, id, fake } = card
+    const { onDragStart, onDrag, onDragEnd } = actions
     const link = '../react/projects/' + id
+
+    let classes = classnames(
+      { 'card': true },
+      { 'closed': true },
+      { 'dragging': this.state.dragging },
+      { 'fake': fake }
+    )
+
     if (type == 'Project') {
       return (
-        <Draggable draggableId={ card.id } index={ index }>
-          {(provided) => (
-            <a href={ link }>
-              <div className="card closed"
-                onClick={ triggerCard }
-                ref={ provided.innerRef }
-                { ...provided.draggableProps }
-              >
-                <div className="content">
-                  <p>{ name }</p>
-                </div>
-              </div>
-            </a>
-          )}
-        </Draggable>
+        <a href={ link }>
+          <div className={ classes }
+            ref={ this.cardRef }
+            onClick={ triggerCard }
+            draggable
+            onDragStart={ (e) => onDragStart(e, id) }
+            onDragEnd={ onDragEnd }>
+            <div className="content">
+              <p>{ name }</p>
+            </div>
+          </div>
+        </a>
       )
     } else if (type == 'Task') {
       return (
-        <Draggable draggableId={ card.id } index={ index }>
-          {(provided) => (
-            <div className="card closed"
-              onClick={ triggerCard }
-              ref={ provided.innerRef }
-              { ...provided.draggableProps }
-              { ...provided.dragHandleProps }
-              mode="SNAP"
-            >
-              <div className="content">
-                <p>{ name }</p>
-              </div>
-            </div>
-          )}
-        </Draggable>
+        <div className={ classes }
+          ref={ this.cardRef }
+          onClick={ triggerCard }
+          draggable
+          onDragStart={ (e) => this.onDragStart(e, id) }
+          onDragEnd={ this.onDragEnd }>
+
+          <div className="content">
+            <p>{ name }</p>
+          </div>
+        </div>
       )
     }
   }

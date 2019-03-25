@@ -10,10 +10,13 @@
 
 .column {
   position: relative;
+
   background-color: #F4F4F4;
+
+  min-width: 250px;
   width: 250px;
   max-width: 250px;
-  min-width: 250px;
+
   min-height: 100px;
   height: calc(100vh - 170px);
   max-height: calc(100vh - 170px);
@@ -31,13 +34,9 @@
   }
 }
 
-
-.general {
+.Done {
   position: absolute;
   margin-left: 0 !important;
-}
-
-.done {
   left: -200px;
   box-shadow: 2px 2px 6px -1px rgba(0,0,0,0.1);
   z-index: 1000;
@@ -50,7 +49,9 @@
   }
 }
 
-.inbox {
+.Inbox {
+  position: absolute;
+  margin-left: 0 !important;
   z-index: 1000;
   height: calc(100vh - 150px);
   max-height: calc(100vh - 150px);
@@ -81,8 +82,13 @@
 
 
 .addTaskInColumn:hover {
-    background-color: #cdd2d4;
-    color: #4d4d4d;
-    text-decoration: underline;
+  background-color: #cdd2d4;
+  color: #4d4d4d;
+  text-decoration: underline;
+}
 
+.dropArea {
+  background-color: grey;
+  width: 100%;
+  height: 60px;
 }

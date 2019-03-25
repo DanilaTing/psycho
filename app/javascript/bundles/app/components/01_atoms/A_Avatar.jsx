@@ -9,7 +9,7 @@ export default class A_Avatar extends React.Component {
   render() {
     return (
       <div className="A_Avatar">
-        <img src="https://avatars3.githubusercontent.com/u/815596?s=40&v=4" alt="AVATAR"/>
+        <img src="" alt=""/>
       </div>
     );
   }

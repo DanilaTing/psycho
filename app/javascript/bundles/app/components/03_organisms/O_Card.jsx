@@ -39,26 +39,31 @@ export default class O_Card extends React.Component {
   }
 
   render() {
-    const { boards, card, index } = this.props
+    const { boards, card, index, toggleDragging, ghostDragRef, dragging } = this.props
     const { open, name, description } = this.state
 
     if (open == false) {
       return (
         <O_CardClosed
-          index       = { index }
-          name        = { name }
-          card        = { card }
-          triggerCard = { this.triggerCard }
+          index          = { index }
+          name           = { name }
+          card           = { card }
+          triggerCard    = { this.triggerCard }
+          ghostDragRef   = { ghostDragRef }
+          dragging       = { dragging }
+          actions        = { this.props.actions }
         />
       )
     } else {
       return (
         <div>
           <O_CardClosed
-            index       = { index }
-            triggerCard = { this.triggerCard }
-            name        = { this.state.name }
-            card        = { card }
+            index          = { index }
+            triggerCard    = { this.triggerCard }
+            name           = { this.state.name }
+            card           = { card }
+            dragging       = { dragging }
+            actions        = { this.props.actions }
           />
           <O_CardOpen
             boards                = { boards }
