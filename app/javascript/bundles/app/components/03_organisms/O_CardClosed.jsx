@@ -33,16 +33,35 @@ export default class O_CardClosed extends React.Component {
   }
 
   render() {
-    const { triggerCard, name, card, index, dragging, boards, actions } = this.props
+    const { triggerCard, name, card, index, dragging, boards, actions, priority } = this.props
     const { type, id, fake, project_id } = card
     const { onDragStart, onDrag, onDragEnd } = actions
     const link = '../react/projects/' + id
+
+    let className = ''
+    switch (priority) {
+      case 'High': {
+        className = 'card_high'
+        break
+      }
+
+      case 'Middle': {
+        className = 'card_middle'
+        break
+      }
+
+      case 'Low': {
+        className = 'card_low'
+        break
+      }
+    }
 
     let classes = classnames(
       { 'card': true },
       { 'closed': true },
       { 'dragging': this.state.dragging },
-      { 'fake': fake }
+      { 'fake': fake },
+      { '[`${className}`]: true' }
     )
 
     return (

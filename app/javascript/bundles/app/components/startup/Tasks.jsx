@@ -17,6 +17,10 @@ export default class Tasks extends React.Component {
     this.pushNewTaskToTasks = this.pushNewTaskToTasks.bind(this)
     this.pushNewCardInColumn = this.pushNewCardInColumn.bind(this)
     this.updateCardInColumns = this.updateCardInColumns.bind(this)
+    this.onBoardClick = this.onBoardClick.bind(this)
+
+    const priorityBoard = props.boards.find(item => item.name === 'Priorities');
+    console.log(priorityBoard)
 
     this.state = {
       cards: [],
@@ -25,41 +29,94 @@ export default class Tasks extends React.Component {
       newTaskVisible: false,
       currentBoard: 'General',
       columnFromWhereCreated: '',
-      activeMenuTab: this.props.activeMenuTab,
-      project: this.props.project
+      activeMenuTab: '',
+      project: this.props.project,
+      lowPriorityCards: priorityBoard.columns.find(item => item.name === 'Low'),
+      middlePriorityCards: priorityBoard.columns.find(item => item.name === 'Middle'),
+      highPriorityCards: priorityBoard.columns.find(item => item.name === 'High')
+    }
+  }
+
+  setPriorities = () => {
+    const priorityBoard = this.props.boards.find(item => item.name === 'Priorities')
+    this.setState({
+      lowPriorityCards: priorityBoard.columns.find(item => item.name === 'Low'),
+      middlePriorityCards: priorityBoard.columns.find(item => item.name === 'Middle'),
+      highPriorityCards: priorityBoard.columns.find(item => item.name === 'High')
+    })
+  }
+
+  addPriorityCard = (data) => {
+    const priorityBoard = this.props.boards.find(item => item.name === 'Priorities')
+    const priorityColumnsIds = {}
+    priorityBoard.columns
+      .filter(item => item.name === 'Low' || item.name === 'Middle' || item.name === 'High')
+      .forEach(item => priorityColumnsIds[item.id] = item.name)
+    switch(priorityColumnsIds[data.column_id]) {
+      case 'Low': {
+        const lowPriorityCards = priorityBoard.columns.find(item => item.name === 'Low');
+        lowPriorityCards.cards.push(data.card)
+        this.setState({ lowPriorityCards });
+        break;
+      }
+      case 'Middle': {
+        const middlePriorityCards = priorityBoard.columns.find(item => item.name === 'Middle');
+        middlePriorityCards.cards.push(data.card)
+        this.setState({ middlePriorityCards });
+        break;
+      }
+      case 'High': {
+        const highPriorityCards = priorityBoard.columns.find(item => item.name === 'High');
+        highPriorityCards.cards.push(data.card)
+        this.setState({ highPriorityCards });
+        break;
+      }
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevState.currentBoard !== this.state.currentBoard) {
+      if (this.state.currentBoard === 'General') {
+        this.setPriorities()
+      } else {
+        this.setState({
+          lowPriorityCards: null,
+          middlePriorityCards: null,
+          highPriorityCards: null
+        })
+      }
     }
   }
 
   componentWillMount() {
-    this.updateState()
-  }
-
-  updateState() {
     const { boards, are_tasks, are_projects } = this.props
+    console.log(boards)
     let cards = []
     let cardInColumns = []
     var inboxId
 
     // Находим Tasks из всех Cards и колонку Inbox
     boards.map(board => {
-      board.columns.map(column => {
-        column.cards.map(card => {
-          if (are_tasks == true) {
-            if (card.type == 'Task') {
-              cards.push(card)
+      if (board.name == this.state.currentBoard) {
+        board.columns.map(column => {
+          column.cards.map(card => {
+            if (are_tasks == true) {
+              if (card.type == 'Task') {
+                cards.push(card)
+              }
             }
-          }
-          if (are_projects == true) {
-            if (card.type == 'Project') {
-              cards.push(card)
+            if (are_projects == true) {
+              if (card.type == 'Project') {
+                cards.push(card)
+              }
             }
+          })
+
+          if (column.name == 'Inbox') {
+            inboxId = column.id
           }
         })
-
-        if (column.name == 'Inbox') {
-          inboxId = column.id
-        }
-      })
+      }
     })
 
     cards.map(card => {
@@ -68,11 +125,26 @@ export default class Tasks extends React.Component {
       })
     })
 
+    var activeMenuTab
+    if (are_tasks == true) {
+      activeMenuTab = 'Tasks'
+    }
+    if (are_projects == true) {
+      activeMenuTab = 'Projects'
+    }
+
     this.setState({
       cards: cards,
       cardInColumns: cardInColumns,
       columnFromWhereCreated: inboxId,
-      inboxId: inboxId
+      inboxId: inboxId,
+      activeMenuTab: activeMenuTab
+    })
+  }
+
+  onBoardClick(currentBoard) {
+    this.setState({
+      currentBoard
     })
   }
 
@@ -126,9 +198,13 @@ export default class Tasks extends React.Component {
     })
   }
 
-  renderCurrentBoard = () => {
+  renderCurrentBoard() {
+    const { project } = this.props
+    const { currentBoard, cards, cardInColumns, lowPriorityCards, middlePriorityCards, highPriorityCards } = this.state
     const { boards } = this.props
-    const { currentBoard, board, cardInColumns, project, cards } = this.state
+
+    console.log(lowPriorityCards, middlePriorityCards, highPriorityCards)
+
     let boardToRender
 
     boards.map(board => {
@@ -147,6 +223,11 @@ export default class Tasks extends React.Component {
         cardInColumns       = { cardInColumns }
         renderNewTask       = { this.renderNewTask }
         updateCardInColumns = { this.updateCardInColumns }
+        lowPriorityCards = {lowPriorityCards}
+        middlePriorityCards = {middlePriorityCards}
+        highPriorityCards = {highPriorityCards}
+        onSave = { () => {
+        }}
       />
     )
   }
@@ -165,6 +246,7 @@ export default class Tasks extends React.Component {
             user               = { user }
             columnId           = { columnFromWhereCreated }
             pushNewTaskToTasks = { this.pushNewTaskToTasks }
+            onSave             = { this.addPriorityCard }
           />
         ) : '' }
         <O_Menubar
@@ -176,7 +258,7 @@ export default class Tasks extends React.Component {
         <O_SubMenubar
           boards       = { boards }
           currentBoard = { this.state.currentBoard }
-          changeCurrentBoard = { this.changeCurrentBoard }
+          onBoardClick = { this.onBoardClick }
         />
         { this.renderCurrentBoard() }
       </section>

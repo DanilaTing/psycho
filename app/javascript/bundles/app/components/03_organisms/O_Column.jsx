@@ -35,6 +35,13 @@ export default class O_Column extends React.Component {
           cardInColArr.push(c)
         }
       })
+    } else if (column.name == 'Inbox' || 'Done') {
+      cardInColumns.map(c => {
+        if (column.id == c.column_id) {
+          const columnName = columns.find(item => item.id === c.column_id).name
+          cardInColArr.push({...c, columnName })
+        }
+      })
     } else {
       if (project) {
         cardInColumns.map(c => {

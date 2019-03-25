@@ -8,7 +8,7 @@ export default class O_SubMenubar extends React.Component {
   }
 
   renderBoards() {
-    const { project, boards, currentBoard, changeCurrentBoard } = this.props
+    const { project, boards, currentBoard, onBoardClick } = this.props
     let boardsToRender = []
 
     boards.map((board, i) => {
@@ -18,7 +18,7 @@ export default class O_SubMenubar extends React.Component {
         )
       } else {
         boardsToRender.push(
-          <a key={ i } onClick={ () => changeCurrentBoard(board.name) }>{ board.name }</a>
+          <a key={ i } onClick={() => onBoardClick(board.name)} >{ board.name }</a>
         )
       }
     })

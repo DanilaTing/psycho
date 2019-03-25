@@ -104,7 +104,7 @@ export default class O_CardOpen extends React.Component {
   }
 
   deleteCard() {
-    const { card } = this.props
+    const { card, triggerCard } = this.props
 
     const card_link = '../../cards/' + card.id
 
