@@ -215,7 +215,12 @@ export default class O_CardOpen extends React.Component {
           <div className="close" onClick={ triggerCard }></div>
           <div className="M_CardActions">
             <div className="A_TextButton delete" onClick={ this.deleteCard }>Delete</div>
-            <div className="A_TextButton turnIntoProject" onClick={ this.turnIntoProject }>Turn Into Project</div>
+            { card.type == 'Task' ? (
+              <div className="A_TextButton turnIntoProject" onClick={ this.turnIntoProject }>Turn Into Project</div>
+            ) : '' }
+            { card.type == 'Project' ? (
+              <a className="A_TextButton" href={ '../../react/projects/' + card.id }>Go To Project →</a>
+            ) : '' }
           </div>
         </div>
       </div>

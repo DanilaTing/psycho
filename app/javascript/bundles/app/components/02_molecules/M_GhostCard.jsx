@@ -2,13 +2,15 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
 
+import A_ProjectLabel from '../01_atoms/A_ProjectLabel';
+
 export default class M_GhostCard extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    const { cards, cardId, ghostRef } = this.props
+    const { cards, boards, cardId, ghostRef } = this.props
 
     let classes = classnames(
       { 'card': true },
@@ -28,6 +30,7 @@ export default class M_GhostCard extends React.Component {
       <div className={ classes } ref={ ghostRef }>
         <div className="content">
           { card ? (<p>{ card.name }</p>) : ''}
+          { card && card.project_id ? (<A_ProjectLabel projectId={ card.project_id } boards={ boards } />) : '' }
         </div>
       </div>
     )

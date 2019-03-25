@@ -29,7 +29,7 @@ export default class O_Column extends React.Component {
     const { boards, column, cards, cardInColumns, project, projectTasks, ghostDragRef, dragging } = this.props
     let cardInColArr = []
 
-    if (column.name == 'Inbox' || 'Done') {
+    if (column.name == 'Inbox' || column.name == 'Done') {
       cardInColumns.map(c => {
         if (column.id == c.column_id) {
           cardInColArr.push(c)
@@ -122,7 +122,7 @@ export default class O_Column extends React.Component {
         { arrayToRender }
 
         { name != 'Done' && name != 'Inbox' ? (
-          <div className="addTaskInColumn" onClick={ ()=>this.props.renderNewTask(id) }>Add a task...</div>
+          <div className="addTaskInColumn" onClick={ ()=>this.props.renderNewTask(id) }>Add a card...</div>
         ) : '' }
       </div>
     )

@@ -10,6 +10,7 @@ export default class O_Card extends React.Component {
 
     this.triggerCard = this.triggerCard.bind(this)
     this.updateCardName = this.updateCardName.bind(this)
+    this.updateCardDescprition = this.updateCardDescprition.bind(this)
 
     this.state = {
       open: this.props.open,
@@ -38,8 +39,14 @@ export default class O_Card extends React.Component {
     })
   }
 
+  updateCardDescprition(description) {
+    this.setState({
+      description: description
+    })
+  }
+
   render() {
-    const { boards, card, index, toggleDragging, ghostDragRef, dragging } = this.props
+    const { boards, card, index, toggleDragging, ghostDragRef, dragging, project } = this.props
     const { open, name, description } = this.state
 
     if (open == false) {
@@ -51,6 +58,7 @@ export default class O_Card extends React.Component {
           triggerCard    = { this.triggerCard }
           ghostDragRef   = { ghostDragRef }
           dragging       = { dragging }
+          boards         = { boards }
           actions        = { this.props.actions }
         />
       )
@@ -63,6 +71,7 @@ export default class O_Card extends React.Component {
             name           = { this.state.name }
             card           = { card }
             dragging       = { dragging }
+            boards         = { boards }
             actions        = { this.props.actions }
           />
           <O_CardOpen
@@ -70,6 +79,7 @@ export default class O_Card extends React.Component {
             card                  = { card }
             name                  = { name }
             description           = { description }
+            boards                = { boards }
             updateCardName        = { this.updateCardName }
             updateCardDescprition = { this.updateCardDescprition }
             triggerCard           = { this.triggerCard }

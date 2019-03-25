@@ -1,0 +1,15 @@
+.A_ProjectLink {
+  position: absolute;
+  right: 10px;
+  top: 2px;
+  color: lightgrey;
+  &:hover {
+    color: grey;
+  }
+
+  i {
+    width: 10px;
+    height: 10px;
+    font-size: 12px;
+  }
+}

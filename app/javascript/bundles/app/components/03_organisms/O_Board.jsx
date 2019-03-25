@@ -29,9 +29,18 @@ export default class O_Board extends React.Component {
     this.ghostDragRef = React.createRef()
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      cardInColumns: nextProps.cardInColumns,
+      columns: nextProps.board.columns,
+    })
+
+    this.renderCurrentBoardColumns()
+  }
+
   renderCurrentBoardColumns() {
-    const { boards, board, cards, renderNewTask, projectTasks, project } = this.props
-    const { cardInColumns, dragging, dragOverId, columns } = this.state
+    const { boards, board, cards, renderNewTask, projectTasks, project, columns, cardInColumns } = this.props
+    const { dragging, dragOverId } = this.state
 
     let actions = {
       toggleDragging: this.toggleDragging,
@@ -231,11 +240,14 @@ export default class O_Board extends React.Component {
   }
 
   renderGhostDrag() {
+    const { cards, boards } = this.props
+    const { draggingCardId } = this.state
     return(
       <M_GhostCard
         ghostRef={ this.ghostDragRef }
-        cardId={ this.state.draggingCardId }
-        cards={ this.props.cards }
+        cardId={ draggingCardId }
+        cards={ cards }
+        boards={ boards }
       />
     )
   }

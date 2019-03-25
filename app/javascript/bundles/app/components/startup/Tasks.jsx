@@ -31,6 +31,10 @@ export default class Tasks extends React.Component {
   }
 
   componentWillMount() {
+    this.updateState()
+  }
+
+  updateState() {
     const { boards, are_tasks, are_projects } = this.props
     let cards = []
     let cardInColumns = []
@@ -69,6 +73,12 @@ export default class Tasks extends React.Component {
       cardInColumns: cardInColumns,
       columnFromWhereCreated: inboxId,
       inboxId: inboxId
+    })
+  }
+
+  changeCurrentBoard = (boardName) => {
+    this.setState({
+      currentBoard: boardName
     })
   }
 
@@ -116,10 +126,9 @@ export default class Tasks extends React.Component {
     })
   }
 
-  renderCurrentBoard() {
-    const { project } = this.props
-    const { currentBoard, cards, cardInColumns } = this.state
+  renderCurrentBoard = () => {
     const { boards } = this.props
+    const { currentBoard, board, cardInColumns, project, cards } = this.state
     let boardToRender
 
     boards.map(board => {
@@ -132,6 +141,7 @@ export default class Tasks extends React.Component {
       <O_Board
         boards              = { boards }
         board               = { boardToRender }
+        columns             = { boardToRender.columns }
         project             = { project }
         cards               = { cards }
         cardInColumns       = { cardInColumns }
@@ -143,7 +153,7 @@ export default class Tasks extends React.Component {
 
   render() {
     const { boards, user } = this.props
-    const { columnFromWhereCreated, inboxId, activeMenuTab, project } = this.state
+    const { columnFromWhereCreated, inboxId, activeMenuTab, project, cards, cardInColumns } = this.state
 
     return (
       <section>
@@ -161,10 +171,12 @@ export default class Tasks extends React.Component {
           activeTab     = { activeMenuTab }
           renderNewTask = { this.renderNewTask }
           inboxId       = { inboxId }
+          project       = { project }
         />
         <O_SubMenubar
           boards       = { boards }
           currentBoard = { this.state.currentBoard }
+          changeCurrentBoard = { this.changeCurrentBoard }
         />
         { this.renderCurrentBoard() }
       </section>

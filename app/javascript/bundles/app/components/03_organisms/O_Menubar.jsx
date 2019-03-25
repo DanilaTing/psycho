@@ -10,7 +10,7 @@ export default class O_Menubar extends React.Component {
   }
 
   render() {
-    const { activeTab, renderNewTask, closeNewTask, inboxId } = this.props
+    const { activeTab, renderNewTask, closeNewTask, inboxId, project } = this.props
     const id = 7
 
     let tabs = [
@@ -24,6 +24,16 @@ export default class O_Menubar extends React.Component {
         activeTab: activeTab
       }
     ]
+
+    if (project) {
+      tabs.push(
+        {
+          text: project.name,
+          link: '../../react/projects/' + project.id,
+          activeTab: activeTab
+        }
+      )
+    }
     return (
       <section className="O_Menubar">
         <div className="leftside">

@@ -1,0 +1,43 @@
+.card.closed {
+  cursor: pointer;
+  height: max-content;
+  margin-left: 5%;
+
+  .content {
+    padding: 10px;
+    position: relative;
+
+    .labels {
+      height: max-content;
+
+      & > * {
+        display: inline-block;
+      }
+    }
+  }
+
+  &.dragging {
+    // position: absolute;
+    // opacity: 0;
+
+    background-color: lightgrey;
+    box-shadow: none;
+
+    * {
+      opacity: 0;
+    }
+  }
+
+  &.fake {
+    background-color: lightgrey;
+    box-shadow: none;
+
+    * {
+      opacity: 0;
+    }
+  }
+
+  &:active {
+    cursor: grabbing !important;
+  }
+}
