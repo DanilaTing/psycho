@@ -16,11 +16,6 @@ export default class O_CardClosed extends React.Component {
 
     let className = ''
     switch (priority) {
-      // case 'None': {
-      //   className = 'card_none'
-      //   break
-      // }
-
       case 'High': {
         className = 'card_high'
         break
