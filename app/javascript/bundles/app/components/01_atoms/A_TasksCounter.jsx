@@ -22,18 +22,11 @@ export default class A_TasksCounter extends React.Component {
 
     var amountOfTasks = tasks.length
 
-    if (amountOfTasks != 0) {
-      return (
-        <div className="A_TasksCounter">
-          <i className="far fa-sticky-note"></i>
-          { amountOfTasks }
-        </div>
-      )
-    } else {
-      return (
-        <div>
-        </div>
-      )
-    }
+    return (
+      <div className="A_TasksCounter">
+        <i className="far fa-sticky-note"></i>
+        { amountOfTasks }
+      </div>
+    )
   }
 }
