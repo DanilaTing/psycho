@@ -51,8 +51,6 @@ export default class O_NewTask extends React.Component {
       // position: position
     }
 
-    this.props.onSave(data)
-
     if (project) {
       data.card = {
         type: 'Task',

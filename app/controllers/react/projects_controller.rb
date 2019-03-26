@@ -27,7 +27,7 @@ class React::ProjectsController < ApplicationController
 
     if user_signed_in?
       @project.as_json
-      @boards = @project.boards.as_json(include: { columns: {
+      @boards = Board.all.as_json(include: { columns: {
                                                 include: { cards: {
                                                            only: [:id, :name, :description, :project_id, :type],
                                                            include: { card_in_columns: {

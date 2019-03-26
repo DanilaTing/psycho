@@ -26,16 +26,10 @@ export default class O_Column extends React.Component {
   }
 
   renderCards() {
-    const { boards, column, cards, cardInColumns, project, projectTasks, ghostDragRef, dragging } = this.props
+    const { boards, column, cards, cardInColumns, project, projectTasks, ghostDragRef, dragging, columns, lowPriorityCards, middlePriorityCards, highPriorityCards, actions } = this.props
     let cardInColArr = []
 
     if (column.name == 'Inbox' || column.name == 'Done') {
-      cardInColumns.map(c => {
-        if (column.id == c.column_id) {
-          cardInColArr.push(c)
-        }
-      })
-    } else if (column.name == 'Inbox' || 'Done') {
       cardInColumns.map(c => {
         if (column.id == c.column_id) {
           const columnName = columns.find(item => item.id === c.column_id).name
@@ -46,31 +40,56 @@ export default class O_Column extends React.Component {
       if (project) {
         cardInColumns.map(c => {
           if (c.card.project_id == project.id && c.card.id == c.card_id && column.id == c.column_id) {
-            cardInColArr.push(c)
+            const columnName = columns.find(item => item.id === c.column_id).name
+            cardInColArr.push({...c, columnName })
           }
         })
       } else {
         cardInColumns.map(c => {
           if (column.id == c.column_id) {
-            cardInColArr.push(c)
+            const columnName = columns.find(item => item.id === c.column_id).name
+            cardInColArr.push({...c, columnName })
           }
         })
       }
     }
 
+    console.log('cardInColArr: ', cardInColArr);
+
     let arrayToRender = []
 
     cardInColArr.map((c, i) => {
+      let cardPriority = c.columnName
+      
+      if (lowPriorityCards && middlePriorityCards && highPriorityCards) {
+        let priorityCard = lowPriorityCards.cards.find(item => item.name === c.card.name)
+        if (priorityCard) {
+          cardPriority = 'Low'
+        } else {
+          priorityCard = middlePriorityCards.cards.find(item => item.name === c.card.name);
+          if (priorityCard) {
+            cardPriority = 'Middle'
+          } else {
+            priorityCard = highPriorityCards.cards.find(item => item.name === c.card.name);
+            if (priorityCard) {
+              cardPriority = 'High'
+            }
+          }
+        }
+      }
+
       arrayToRender.push(
         <O_Card
-          key          = { i }
-          index        = { i }
-          boards       = { boards }
-          card         = { c.card }
-          open         = { false }
+          key      = { i }
+          index    = { i }
+          boards   = { boards }
+          card     = { c.card }
+          open     = { false }
           ghostDragRef = { ghostDragRef }
           dragging     = { dragging }
-          actions      = { this.props.actions }
+          priority = { cardPriority || c.columnName }
+          actions={ actions }
+          onSave   = { this.props.onSave }
         />
       )
     })

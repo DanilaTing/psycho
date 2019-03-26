@@ -64,7 +64,7 @@ export default class O_Card extends React.Component {
           ghostDragRef   = { ghostDragRef }
           dragging       = { dragging }
           boards         = { boards }
-          priority    = { priority }
+          priority       = { priority }
           actions        = { this.props.actions }
         />
       )
@@ -78,7 +78,7 @@ export default class O_Card extends React.Component {
             card           = { card }
             dragging       = { dragging }
             boards         = { boards }
-            priority    = { priority }
+            priority       = { priority }
             actions        = { this.props.actions }
           />
           <O_CardOpen

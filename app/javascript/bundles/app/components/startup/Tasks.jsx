@@ -29,7 +29,7 @@ export default class Tasks extends React.Component {
       newTaskVisible: false,
       currentBoard: 'General',
       columnFromWhereCreated: '',
-      activeMenuTab: '',
+      activeMenuTab: this.props.activeMenuTab,
       project: this.props.project,
       lowPriorityCards: priorityBoard.columns.find(item => item.name === 'Low'),
       middlePriorityCards: priorityBoard.columns.find(item => item.name === 'Middle'),
@@ -125,20 +125,11 @@ export default class Tasks extends React.Component {
       })
     })
 
-    var activeMenuTab
-    if (are_tasks == true) {
-      activeMenuTab = 'Tasks'
-    }
-    if (are_projects == true) {
-      activeMenuTab = 'Projects'
-    }
-
     this.setState({
       cards: cards,
       cardInColumns: cardInColumns,
       columnFromWhereCreated: inboxId,
       inboxId: inboxId,
-      activeMenuTab: activeMenuTab
     })
   }
 
@@ -226,8 +217,7 @@ export default class Tasks extends React.Component {
         lowPriorityCards = {lowPriorityCards}
         middlePriorityCards = {middlePriorityCards}
         highPriorityCards = {highPriorityCards}
-        onSave = { () => {
-        }}
+        onSave = { () => {}}
       />
     )
   }

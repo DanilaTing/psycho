@@ -61,7 +61,7 @@ export default class O_CardClosed extends React.Component {
       { 'closed': true },
       { 'dragging': this.state.dragging },
       { 'fake': fake },
-      { '[`${className}`]: true' }
+      { [`${className}`]: true }
     )
 
     return (
