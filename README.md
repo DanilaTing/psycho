@@ -1,24 +1,18 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Entry Points
 
-Things you may want to cover:
+### boards/:board_id/projects (projects index)
+* Get general board (by boolean value)
+* Get board columns
+* Get column cards with Project type
 
-* Ruby version
+### boards/:board_id/projects/:project_id (projects show)
+* Get board
+* Get board columns
+* Get column cards with Task type attached to this project
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### boards/:board_id/tasks (tasks index)
+* Get board
+* Get board columns
+* Get all column cards with Task type
