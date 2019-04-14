@@ -7,7 +7,8 @@ class Ability
 
 
     if user.present?  # additional permissions for logged in users (they can manage their posts)
-      can :manage, Board, Column, Card, Task, Project, user_id: user.id
+      # can :manage, Board, Column, Card, Task, Project, user_id: user.id
+      can :manage, :all
       # if user.admin?  # additional permissions for administrators
       #   can :manage, :all
       # end

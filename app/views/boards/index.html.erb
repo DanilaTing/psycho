@@ -1,33 +1,15 @@
-<p id="notice"><%= notice %></p>
+<% content_for :boards_menu do %>
+  <% current_user.boards.each do |board| %>
+    <%= link_to board.name, board_path(board) %>
+  <% end %>
+<% end %>
 
-<h1>Boards</h1>
+<% @board.columns.each do |column| %>
+  <hr>
+  <h1><%= column.name %></h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Project</th>
-      <th>Position</th>
-      <th>User_Id</th>
-      <th colspan="4"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @boards.each do |board| %>
-      <tr>
-        <td><%= board.name %></td>
-        <td><%= board.project_id %></td>
-        <td><%= board.position %></td>
-        <td><%= board.user_id %></td>
-        <td><%= link_to 'Show', board %></td>
-        <td><%= link_to 'Edit', edit_board_path(board) %></td>
-        <td><%= link_to 'Destroy', board, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Board', new_board_path %>
+  <% column.tasks.each do |task| %>
+    <p><%= task.name %></p>
+  <% end %>
+  <hr>
+<% end %>

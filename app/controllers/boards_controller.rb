@@ -1,22 +1,38 @@
 class BoardsController < ApplicationController
-  load_and_authorize_resource
+  before_action :authenticate_user!
+  # load_and_authorize_resource
   before_action :set_board, only: [:show, :edit, :update, :destroy]
 
-  # GET /boards
-  # GET /boards.json
   def index
-    # @boards = Board.all
-    @user = current_user
-    @boards = @user.boards.all
-    @columns = Column.all
+    @board_json = current_user.boards.where(general: true).as_json(
+      include: {
+        columns: {
+          include: {
+            tasks: {
+              only: [:id, :name, :description, :project_id, :type]
+            }
+          }
+        }
+      }
+    )
+
+    @board = Board.find_by_name('General')
   end
 
-  # GET /boards/1
-  # GET /boards/1.json
   def show
-    @columns = Column.where(:board_id => @board.id).order(position: :asc)
-    @done = Column.where(:name => 'Done')
-    @inbox = Column.where(:name => 'Inbox')
+    @board_json = Board.find(params[:id]).as_json(
+      include: {
+        columns: {
+          include: {
+            tasks: {
+              only: [:id, :name, :description, :project_id, :type]
+            }
+          }
+        }
+      }
+    )
+
+    @board = Board.find(params[:id])
   end
 
   # GET /boards/new

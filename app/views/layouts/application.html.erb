@@ -8,6 +8,14 @@
   </head>
 
   <body>
+    <% if current_user %>
+      <%= link_to 'Tasks', root_url %>
+      <%= link_to 'Projects', board_projects_url(@board) %>
+      <hr>
+    <% end %>
+
+    <%= yield :boards_menu %>
+
     <%= yield %>
   </body>
 </html>
