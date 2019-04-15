@@ -1,14 +1,10 @@
 class BoardsController < ApplicationController
-  load_and_authorize_resource
+  before_action :authenticate_user!
+  # load_and_authorize_resource
   before_action :set_board, only: [:show, :edit, :update, :destroy]
 
-  # GET /boards
-  # GET /boards.json
   def index
-    # @boards = Board.all
-    @user = current_user
-    @boards = @user.boards.all
-    @columns = Column.all
+    @general_board = current_user.boards.where(general: true)
   end
 
   # GET /boards/1
