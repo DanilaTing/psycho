@@ -61,8 +61,9 @@ def create_tasks
   @tasks.each do |p|
     random_column_from_general_board = user.boards.find_by_name('General').columns.sample
     random_column_from_priorities_board = user.boards.find_by_name('Priorities').columns.sample
-    
-    task = random_column_from_general_board.tasks.create!(name: p, user_id: user.id)
+    random_project = user.projects.sample
+
+    task = random_column_from_general_board.tasks.create!(name: p, user_id: user.id, project_id: random_project.id)
     puts "Task with name #{ task.name } created"
     puts "#{ task.to_json }"
 

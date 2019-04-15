@@ -1,0 +1,17 @@
+<% content_for :boards_menu do %>
+  <% current_user.boards.each do |board| %>
+    <%= link_to board.name, board_project_path(board) %>
+  <% end %>
+<% end %>
+
+<% @board.columns.each do |column| %>
+  <hr>
+  <h1><%= column.name %></h1>
+
+  <% column.tasks.each do |task| %>
+    <% if task.project_id == @project.id %>
+      <p><%= task.name %></p>
+    <% end %>
+  <% end %>
+  <hr>
+<% end %>

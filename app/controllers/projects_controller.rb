@@ -12,6 +12,8 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @board = Board.find(params[:board_id])
+    # @board = Board.find(params[:board_id]).includes(:columns).includes(:tasks).where(tasks: { project_id: @project.id })
+    # @board = Board.find(params[:board_id]).joins(:columns).joins(:tasks).where(tasks: { project_id: @project.id })
   end
 
   # GET /projects/new

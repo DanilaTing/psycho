@@ -21,6 +21,7 @@ class TasksController < ApplicationController
   def new
     @task = Task.new
     @columns = Column.all
+    @board = Board.find_by_name('General')
   end
 
   # GET /tasks/1/edit
