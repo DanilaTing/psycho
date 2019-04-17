@@ -1,6 +1,7 @@
 class BoardsController < ApplicationController
   before_action :authenticate_user!
   # load_and_authorize_resource
+  before_action :set_general_board, :set_boards, only: [:index, :show]
   before_action :set_board, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -16,7 +17,7 @@ class BoardsController < ApplicationController
       }
     )
 
-    @board = Board.find_by_name('General')
+    @board = current_user.boards.find_by_name('General')
   end
 
   def show
@@ -32,7 +33,7 @@ class BoardsController < ApplicationController
       }
     )
 
-    @board = Board.find(params[:id])
+    @board = current_user.boards.find(params[:id])
   end
 
   # GET /boards/new

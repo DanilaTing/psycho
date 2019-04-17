@@ -1,0 +1,7 @@
+<div class="O_Column">
+  <h1><%= projects_column.name %></h1>
+
+  <% projects_column.projects.each do |project| %>
+    <%= render 'projects/project', project: project %>
+  <% end %>
+</div>

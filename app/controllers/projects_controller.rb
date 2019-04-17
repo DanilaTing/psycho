@@ -1,17 +1,20 @@
 class ProjectsController < ApplicationController
+  before_action :authenticate_user!
   skip_before_action :verify_authenticity_token
+  before_action :set_general_board, :set_boards, only: [:index, :show]
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   # GET /projects
   # GET /projects.json
   def index
-    @board = Board.find(params[:board_id])
+    @general_board = current_user.boards.find_by_name('General')
+    @board = current_user.boards.find(params[:board_id])
   end
 
   # GET /projects/1
   # GET /projects/1.json
   def show
-    @board = Board.find(params[:board_id])
+    @board = current_user.boards.find(params[:board_id])
   end
 
   # GET /projects/new
@@ -66,7 +69,7 @@ class ProjectsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
-      @project = Project.find(params[:id])
+      @project = current_user.projects.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

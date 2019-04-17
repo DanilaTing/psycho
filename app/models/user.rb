@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :boards
   has_many :tasks
   has_many :projects
+  has_many :trello_imports
 
   def create_general_board
     board = self.boards.create(name: 'General', general: true)

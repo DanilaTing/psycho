@@ -1,0 +1,9 @@
+<div class="O_Column">
+  <h1><%= project_column.name %></h1>
+
+  <% project_column.tasks.each do |task| %>
+    <% if task.project_id == @project.id %>
+      <%= render 'tasks/task', task: task %>
+    <% end %>
+  <% end %>
+</div>

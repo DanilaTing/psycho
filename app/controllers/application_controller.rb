@@ -10,13 +10,21 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def set_current_user
-    User.current = current_user
+  # def set_current_user
+  #   User.current = current_user
+  # end
+
+  # def show
+  #   @columns = Column.all
+  #   @boards = Board.all
+  #   @cards = Card.all
+  # end
+
+  def set_general_board
+    @general_board = current_user.boards.find_by_name('General')
   end
 
-  def show
-    @columns = Column.all
-    @boards = Board.all
-    @cards = Card.all
+  def set_boards
+    @boards = current_user.boards
   end
 end

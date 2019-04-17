@@ -1,6 +1,8 @@
 class TasksController < ApplicationController
+  before_action :authenticate_user!
   skip_before_action :verify_authenticity_token
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  respond_to :html, :js
 
   # GET /tasks
   # GET /tasks.json
@@ -10,11 +12,7 @@ class TasksController < ApplicationController
     @columns = Column.all
   end
 
-  # GET /tasks/1
-  # GET /tasks/1.json
   def show
-    @project = Project.find_by_id(@task.project_id)
-    @columns = Column.all
   end
 
   # GET /tasks/new

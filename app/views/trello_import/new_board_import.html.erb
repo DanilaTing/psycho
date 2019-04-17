@@ -1,0 +1,13 @@
+<h1>Trello Board Import</h1>
+<br>
+
+<% @trello_imports.each do |trello_import| %>
+  <div>
+    <%= trello_import.trello_board_name %>
+
+    <% unless trello_import.imported %>
+      <%= link_to 'Import', trello_import_create_board_import_path(board_id: trello_import.trello_board_id) %>
+    <% end %>
+    <br>
+  </div>
+<% end %>

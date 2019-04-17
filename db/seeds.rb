@@ -40,7 +40,6 @@ def create_projects
 
     project = random_column_from_general_board.projects.create!(name: p, user_id: user.id)
     puts "Project with name #{ project.name } created"
-    puts "#{ project.to_json }"
 
     card_in_column = CardInColumn.create!(
       columnable_type: 'Project',
@@ -49,34 +48,45 @@ def create_projects
     )
 
     puts "CardInColumn created"
-    puts "#{ card_in_column.to_json }"
   end
-
-  puts "#{ CardInColumn.all.to_json }"
 end
 
 def create_tasks
   user = User.find_by_email('test@test.com')
 
-  @tasks.each do |p|
-    random_column_from_general_board = user.boards.find_by_name('General').columns.sample
-    random_column_from_priorities_board = user.boards.find_by_name('Priorities').columns.sample
-    
-    task = random_column_from_general_board.tasks.create!(name: p, user_id: user.id)
-    puts "Task with name #{ task.name } created"
-    puts "#{ task.to_json }"
+  10.times do
+    @tasks.each do |p|
+      random_column_from_general_board = user.boards.find_by_name('General').columns.sample
+      random_column_from_priorities_board = user.boards.find_by_name('Priorities').columns.sample
 
-    card_in_column = CardInColumn.create!(
-      columnable_type: 'Task',
-      columnable_id: task.id,
-      column_id: random_column_from_priorities_board.id
-    )
+      task = Task.new(name: p, user_id: user.id)
 
-    puts "CardInColumn created"
-    puts "#{ card_in_column.to_json }"
+      if Random.new_seed.even?
+        project = Project.all.sample
+        task.project_id = project.id
+      end
+
+      task.save!
+
+      puts "Task with name #{ task.name } created"
+
+      card_in_column_1 = CardInColumn.create!(
+        columnable_type: 'Task',
+        columnable_id: task.id,
+        column_id: random_column_from_general_board.id
+      )
+
+      puts "CardInColumn 1 created"
+
+      card_in_column_2 = CardInColumn.create!(
+        columnable_type: 'Task',
+        columnable_id: task.id,
+        column_id: random_column_from_priorities_board.id
+      )
+
+      puts "CardInColumn 2 created"
+    end
   end
-
-  puts "#{ CardInColumn.all.to_json }"
 end
 
 seed_data

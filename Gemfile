@@ -41,15 +41,12 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'webpacker', '~> 3.5'
 gem 'jquery-rails'
-
 gem 'carrierwave', '~> 1.0'
 gem 'link_thumbnailer'
-
 gem 'react_on_rails', '11.1.4'
-
 gem 'devise'
-
 gem 'cancancan', '~> 2.0'
+gem 'ruby-trello'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -16,3 +16,10 @@
 * Get board
 * Get board columns
 * Get all column cards with Task type
+
+## Collaboration Authorisation
+
+### Project Creator
+
+### Project Collaborator
+* Collaborator can't destroy board

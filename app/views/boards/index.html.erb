@@ -1,15 +1,13 @@
 <% content_for :boards_menu do %>
-  <% current_user.boards.each do |board| %>
-    <%= link_to board.name, board_path(board) %>
-  <% end %>
+  <menu class="O_Menubar">
+    <div class="left">
+      <% @boards.each do |board| %>
+        <%= link_to board.name, board_path(board) %>
+      <% end %>
+    </div>
+
+    <div class="right"></div>
+  </menu>
 <% end %>
 
-<% @board.columns.each do |column| %>
-  <hr>
-  <h1><%= column.name %></h1>
-
-  <% column.tasks.each do |task| %>
-    <p><%= task.name %></p>
-  <% end %>
-  <hr>
-<% end %>
+<%= render partial: 'columns/column', collection: @board.columns %>
